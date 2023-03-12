@@ -14,8 +14,8 @@ object Dependencies {
     val kamonVersion = "2.6.0"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
-      "io.kamon" %% "kamon-play" % kamonVersion,
       "io.kamon" %% "kamon-apm-reporter" % kamonVersion
+      // "io.kamon" %% "kamon-play" % kamonVersion
     )
   }
 }
