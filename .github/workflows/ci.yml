@@ -26,8 +26,8 @@ jobs:
       run: sbt checkFormat
     - name: Scalafix Lint
       run: sbt scalafixLint
-    #- name: Scapegoat Lint
-    #  run: sbt scapegoatLint
+    - name: Scapegoat Lint
+      run: sbt scapegoatLint
     - name: Run tests with coverage Report
       run: sbt test
       #    - uses: codecov/codecov-action@v3

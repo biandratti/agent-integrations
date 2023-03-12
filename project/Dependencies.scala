@@ -3,7 +3,7 @@ import sbt._
 
 object Dependencies {
 
-  val appDependencies: Seq[ModuleID] = {
+  val playDependencies: Seq[ModuleID] = {
     Seq(
       guice,
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test

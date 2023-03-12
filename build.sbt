@@ -11,8 +11,9 @@ lazy val commonSettings = Seq(
   organization := "biandratti",
   scalaVersion := scalaV,
   scalacOptions += "-Xsource:3",
-  // ThisBuild / scapegoatVersion := "1.4.17",
-  // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
+  ThisBuild / scapegoatVersion := "1.4.17",
+  wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
+  wartremoverExcluded ++= (Compile / routes).value,
   coverageFailOnMinimum := true,
   coverageMinimumStmtTotal := 80,
   coverageMinimumBranchTotal := 80,
@@ -31,11 +32,11 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.appDependencies
+      libraryDependencies ++= Dependencies.playDependencies
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
-//addCommandAlias("scapegoatLint", ";compile ;scapegoat")
+addCommandAlias("scapegoatLint", ";compile ;scapegoat")
 addCommandAlias("scalafixLint", ";compile ;scalafix")
 addCommandAlias(
   "testCoverage",
