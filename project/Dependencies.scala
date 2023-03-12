@@ -6,7 +6,7 @@ object Dependencies {
   val appDependencies: Seq[ModuleID] = {
     Seq(
       guice,
-      "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
+      "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
     )
   }
 }
