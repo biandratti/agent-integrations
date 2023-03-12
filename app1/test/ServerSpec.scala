@@ -1,5 +1,3 @@
-package controllers
-
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatestplus.play.*
 import play.api.mvc.Results

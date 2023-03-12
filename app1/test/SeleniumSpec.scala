@@ -1,5 +1,3 @@
-package controllers
-
 import org.scalatestplus.play.*
 
 class SeleniumSpec

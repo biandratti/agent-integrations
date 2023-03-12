@@ -21,9 +21,10 @@ lazy val commonSettings = Seq(
   semanticdbVersion := scalafixSemanticdb.revision,
   scalafixOnCompile := true,
   scalacOptions ++= Seq(
-    "-feature",
+    "-Wunused"
+    /*"-feature",
     "-deprecation",
-    "-Xfatal-warnings"
+    "-Xfatal-warnings"*/
   )
 )
 

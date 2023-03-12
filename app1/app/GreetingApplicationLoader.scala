@@ -28,7 +28,7 @@ class GreetingComponents(context: Context)
 
   lazy val router: Router = {
     // add the prefix string in local scope for the Routes constructor
-    val prefix: String = "/"
+    
     wire[Routes]
   }
 }

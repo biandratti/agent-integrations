@@ -1,5 +1,3 @@
-package controllers
-
 import org.scalatestplus.play.FakeApplicationFactory
 import play.api.{Application, ApplicationLoader, Environment}
 

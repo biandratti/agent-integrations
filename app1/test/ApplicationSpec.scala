@@ -1,11 +1,8 @@
-package controllers
-
 import org.scalatestplus.play.{BaseOneAppPerTest, PlaySpec}
 import play.api.test.*
 import play.api.test.Helpers.*
 
 /** */
-//@SuppressWarnings(Array("org.wartremover.warts.All"))
 class ApplicationSpec
     extends PlaySpec
     with BaseOneAppPerTest
