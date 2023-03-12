@@ -35,11 +35,7 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      // libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
-      libraryDependencies ++= Seq(
-        "com.softwaremill.macwire" %% "macros" % "2.5.8" % "provided",
-        "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
-      )
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")

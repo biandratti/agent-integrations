@@ -1,11 +1,10 @@
-import play.sbt.PlayImport.guice
 import sbt._
 
 object Dependencies {
 
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
-      guice,
+      "com.softwaremill.macwire" %% "macros" % "2.5.8" % "provided",
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
     )
   }
