@@ -28,11 +28,11 @@ lazy val commonSettings = Seq(
 lazy val app1 =
   project
     .in(file("app1"))
-    .enablePlugins(PlayScala)
+    .enablePlugins(PlayScala, JavaAgent)
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.playDependencies
+      libraryDependencies ++= Dependencies.playDependencies // ++ Dependencies.kamonDependencies
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
