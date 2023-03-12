@@ -18,4 +18,4 @@ jobs:
       - name: Print DependencyCheck Result
         uses: albuch/sbt-dependency-check-action@v1.0
         with:
-          jsonReportPath: "app/target/scala-2.13/dependency-check-report.json"
+          jsonReportPath: "app1/target/scala-2.13/dependency-check-report.json"
