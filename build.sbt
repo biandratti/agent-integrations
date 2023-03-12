@@ -12,16 +12,19 @@ lazy val commonSettings = Seq(
   scalaVersion := scalaV,
   scalacOptions += "-Xsource:3",
   ThisBuild / scapegoatVersion := "2.1.1",
-  wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
-  wartremoverExcluded ++= (Compile / routes).value,
+  // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
+  // wartremoverExcluded ++= (Compile / routes).value,
   coverageFailOnMinimum := true,
   coverageMinimumStmtTotal := 80,
   coverageMinimumBranchTotal := 80,
   semanticdbEnabled := true,
   semanticdbVersion := scalafixSemanticdb.revision,
   scalafixOnCompile := true,
-  scalacOptions ++= List(
+  scalacOptions ++= Seq(
     "-Wunused"
+    /*"-feature",
+    "-deprecation",
+    "-Xfatal-warnings"*/
   )
 )
 
@@ -32,7 +35,7 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.playDependencies // ++ Dependencies.kamonDependencies
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
