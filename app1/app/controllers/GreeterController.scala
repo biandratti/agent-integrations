@@ -3,7 +3,12 @@ package controllers
 import models.Greeting
 import play.api.i18n.Langs
 import play.api.libs.json.Json
-import play.api.mvc.{AbstractController, ControllerComponents}
+import play.api.mvc.{
+  AbstractController,
+  Action,
+  AnyContent,
+  ControllerComponents
+}
 import play.twirl.api.Html
 import services.GreetingService
 
@@ -18,11 +23,11 @@ class GreeterController(
     Greeting(2, greetingService.greetingMessage("it"), "sam")
   )
 
-  def greetings = Action {
+  def greetings: Action[AnyContent] = Action {
     Ok(Json.toJson(greetingsList))
   }
 
-  def greetInMyLanguage = Action {
+  def greetInMyLanguage: Action[AnyContent] = Action {
     Ok(
       greetingService.greetingMessage(
         langs.preferred(langs.availables).language
@@ -30,7 +35,7 @@ class GreeterController(
     )
   }
 
-  def index = Action {
+  def index: Action[AnyContent] = Action {
     Ok(Html("<h1>Welcome</h1><p>Your new application is ready.</p>"))
   }
 
