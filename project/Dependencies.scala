@@ -9,12 +9,18 @@ object Dependencies {
     )
   }
 
+  lazy val logstashDependencies: Seq[ModuleID] = {
+    Seq(
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.14.2",
+      "net.logstash.logback" % "logstash-logback-encoder" % "7.3"
+    )
+  }
+
   lazy val kamonDependencies: Seq[ModuleID] = {
     val kamonVersion = "2.6.0"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
-      "io.kamon" %% "kamon-apm-reporter" % kamonVersion
-      // "io.kamon" %% "kamon-play" % kamonVersion
+      "io.kamon" %% "kamon-jaeger" % kamonVersion
     )
   }
 }

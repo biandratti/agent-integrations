@@ -12,6 +12,9 @@ import router.Routes
 class GreetingApplicationLoader extends ApplicationLoader {
   def load(context: Context): Application = {
     Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
+    context.lifecycle.addStopHook { () =>
+      Kamon.stop()
+    }
     new GreetingComponents(
       context
     ).application
