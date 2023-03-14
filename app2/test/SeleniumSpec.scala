@@ -13,7 +13,7 @@ class SeleniumSpec
 
       go to ("http://localhost:" + port)
 
-      pageSource must include("Your new application is ready.")
+      pageSource must include("APP2 is ready.")
     }
   }
 }
