@@ -1,17 +1,17 @@
 import org.scalatestplus.play.FakeApplicationFactory
 import play.api.{Application, ApplicationLoader, Environment}
 
-trait GreeterApplicationFactory extends FakeApplicationFactory {
+trait TraceApplicationFactory extends FakeApplicationFactory {
 
-  private class GreetingApplicationBuilder {
+  private class TraceApplicationBuilder {
     def build(): Application = {
       val env = Environment.simple()
       val context = ApplicationLoader.Context.create(env)
-      val loader = new GreetingApplicationLoader()
+      val loader = new TraceApplicationLoader()
       loader.load(context)
     }
   }
 
-  def fakeApplication(): Application = new GreetingApplicationBuilder().build()
+  def fakeApplication(): Application = new TraceApplicationBuilder().build()
 
 }

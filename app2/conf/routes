@@ -1,0 +1,4 @@
+
+GET        /                         controllers.App2Controller.index
+GET        /trace                    controllers.App2Controller.trace
+

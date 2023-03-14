@@ -9,21 +9,21 @@ import router.Routes
 
 /** Application loader that wires up the application dependencies using Macwire
   */
-class GreetingApplicationLoader extends ApplicationLoader {
+class TraceApplicationLoader extends ApplicationLoader {
   def load(context: Context): Application = {
     Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
     context.lifecycle.addStopHook { () =>
       Kamon.stop()
     }
-    new GreetingComponents(
+    new TraceComponents(
       context
     ).application
   }
 }
 
-class GreetingComponents(context: Context)
+class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
-    with GreetingModule
+    with TraceModule
     with AssetsComponents
     with I18nComponents
     with play.filters.HttpFiltersComponents {
