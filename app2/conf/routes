@@ -1,4 +1,4 @@
 
-GET        /                             controllers.App2Controller.index
-GET        /greetings                    controllers.App2Controller.greetings
+GET        /                         controllers.App2Controller.index
+GET        /trace                    controllers.App2Controller.trace
 

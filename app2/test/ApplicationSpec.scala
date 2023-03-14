@@ -6,7 +6,7 @@ import play.api.test.Helpers.*
 class ApplicationSpec
     extends PlaySpec
     with BaseOneAppPerTest
-    with GreeterApplicationFactory {
+    with TraceApplicationFactory {
 
   "Routes" should {
     "send 404 on a bad request" in {

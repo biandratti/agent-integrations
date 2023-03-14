@@ -1,14 +1,11 @@
 import controllers.App1Controller
-import play.api.i18n.Langs
 import play.api.mvc.ControllerComponents
 
-trait GreetingModule {
+trait TraceModule {
 
   import com.softwaremill.macwire._
 
-  lazy val greeterController = wire[App1Controller]
-
-  def langs: Langs
+  lazy val traceController = wire[App1Controller]
 
   def controllerComponents: ControllerComponents
 }

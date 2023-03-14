@@ -1,6 +1,6 @@
 package controllers
 
-import models.Greeting
+import models.TraceResponse
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -14,13 +14,8 @@ class App2Controller(
     cc: ControllerComponents
 ) extends AbstractController(cc) {
 
-  val greetingsList = Seq(
-    Greeting(1, "Hello", "sameer"),
-    Greeting(2, "Messi", "sam")
-  )
-
-  def greetings: Action[AnyContent] = Action {
-    Ok(Json.toJson(greetingsList))
+  def trace: Action[AnyContent] = Action {
+    Ok(Json.toJson(TraceResponse("Ok")))
   }
 
   def index: Action[AnyContent] = Action {
