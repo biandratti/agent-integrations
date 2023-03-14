@@ -1,13 +1,12 @@
-import controllers.GreeterController
+import controllers.App1Controller
 import play.api.i18n.Langs
 import play.api.mvc.ControllerComponents
-import services.ServicesModule
 
-trait GreetingModule extends ServicesModule {
+trait GreetingModule {
 
   import com.softwaremill.macwire._
 
-  lazy val greeterController = wire[GreeterController]
+  lazy val greeterController = wire[App1Controller]
 
   def langs: Langs
 
