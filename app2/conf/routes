@@ -1,0 +1,4 @@
+
+GET        /                             controllers.App2Controller.index
+GET        /greetings                    controllers.App2Controller.greetings
+
