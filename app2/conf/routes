@@ -1,4 +1,4 @@
 
 GET        /                         controllers.App2Controller.index
-GET        /trace                    controllers.App2Controller.trace
+GET        /api2/v1/trace                    controllers.App2Controller.trace
 

@@ -35,7 +35,9 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies ++ Seq(
+        ws
+      )
     )
 
 lazy val app2 =

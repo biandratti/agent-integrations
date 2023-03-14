@@ -1,6 +1,5 @@
 package controllers
 
-import models.TraceResponse
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -9,14 +8,25 @@ import play.api.mvc.{
   ControllerComponents
 }
 import play.twirl.api.Html
+import services.TraceService
+import scala.concurrent.ExecutionContext
 
 class App1Controller(
+    traceService: TraceService,
     cc: ControllerComponents
 ) extends AbstractController(cc) {
 
-  def trace: Action[AnyContent] = Action {
-    Ok(Json.toJson(TraceResponse("Ok")))
-  }
+  implicit val ec: ExecutionContext =
+    scala.concurrent.ExecutionContext.global // TODO...
+
+  def trace(): Action[AnyContent] =
+    Action.async {
+      traceService
+        .getApp2Trace()
+        .map(response => {
+          Ok(Json.toJson(response))
+        })
+    }
 
   def index: Action[AnyContent] = Action {
     Ok(Html("<h1>Welcome</h1><p>APP1 is ready.</p>"))

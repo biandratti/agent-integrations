@@ -1,6 +1,7 @@
 package controllers
 
 import models.TraceResponse
+import play.api.Logging
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -12,9 +13,11 @@ import play.twirl.api.Html
 
 class App2Controller(
     cc: ControllerComponents
-) extends AbstractController(cc) {
+) extends AbstractController(cc)
+    with Logging {
 
   def trace: Action[AnyContent] = Action {
+    logger.info("trace request")
     Ok(Json.toJson(TraceResponse("Ok")))
   }
 
