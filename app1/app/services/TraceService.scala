@@ -16,8 +16,7 @@ class TraceService(ws: WSClient) extends Logging {
       .get()
       .map(response => {
         logger.info(s"APP2 response: ${response.body}")
-        TraceResponse(response.body)
-        // response.underlying[TraceResponse]
+        response.json.as[TraceResponse]
       })
   }
 }
