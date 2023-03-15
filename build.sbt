@@ -50,6 +50,16 @@ lazy val app2 =
       libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
     )
 
+lazy val app3 =
+  project
+    .in(file("app3"))
+    .enablePlugins(PlayScala, JavaAgent)
+    .settings(commonSettings)
+    .settings(
+      name := "app3",
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
+    )
+
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
 addCommandAlias("scapegoatLint", ";compile ;scapegoat")
 addCommandAlias("scalafixLint", ";compile ;scalafix")

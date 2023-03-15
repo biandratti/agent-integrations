@@ -11,7 +11,7 @@ import play.twirl.api.Html
 import services.TraceService
 import scala.concurrent.ExecutionContext
 
-class App1Controller(
+class AppController(
     traceService: TraceService,
     cc: ControllerComponents
 ) extends AbstractController(cc) {
