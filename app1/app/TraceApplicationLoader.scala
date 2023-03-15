@@ -1,9 +1,7 @@
-import _root_.controllers.AssetsComponents
 import com.softwaremill.macwire.*
 import kamon.Kamon
-import play.api.ApplicationLoader.Context
 import play.api.*
-import play.api.i18n.*
+import play.api.ApplicationLoader.Context
 import play.api.libs.ws.WSClient
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.routing.Router
@@ -27,8 +25,6 @@ class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
     with AhcWSComponents
     with TraceModule
-    with AssetsComponents
-    with I18nComponents
     with play.filters.HttpFiltersComponents {
 
   // set up logger

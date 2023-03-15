@@ -23,4 +23,21 @@ object Dependencies {
       "io.kamon" %% "kamon-jaeger" % kamonVersion
     )
   }
+
+  lazy val openTelemetryDependencies = {
+    val version = "1.11.0"
+    val alphaVersion = s"$version-alpha"
+    Seq(
+      "io.opentelemetry" % "opentelemetry-bom" % version pomOnly (),
+      "io.opentelemetry" % "opentelemetry-api" % version,
+      "io.opentelemetry" % "opentelemetry-sdk" % version,
+      "io.opentelemetry" % "opentelemetry-exporter-jaeger" % version,
+      "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % alphaVersion,
+      "io.opentelemetry" % "opentelemetry-exporter-prometheus" % alphaVersion,
+      "io.opentelemetry" % "opentelemetry-exporter-zipkin" % version,
+      "io.opentelemetry" % "opentelemetry-exporter-jaeger" % version,
+      "io.opentelemetry" % "opentelemetry-exporter-otlp" % version,
+      "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % version % "runtime"
+    )
+  }
 }

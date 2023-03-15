@@ -1,9 +1,7 @@
-import _root_.controllers.AssetsComponents
 import com.softwaremill.macwire.*
 import kamon.Kamon
-import play.api.ApplicationLoader.Context
 import play.api.*
-import play.api.i18n.*
+import play.api.ApplicationLoader.Context
 import play.api.routing.Router
 import router.Routes
 
@@ -24,8 +22,6 @@ class TraceApplicationLoader extends ApplicationLoader {
 class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
     with TraceModule
-    with AssetsComponents
-    with I18nComponents
     with play.filters.HttpFiltersComponents {
 
   // set up logger
