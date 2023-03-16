@@ -35,9 +35,10 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies ++ Seq(
-        ws
-      )
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.kamonDependencies
+        ++ Seq(ws)
     )
 
 lazy val app2 =
@@ -47,7 +48,9 @@ lazy val app2 =
     .settings(commonSettings)
     .settings(
       name := "app2",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.kamonDependencies
     )
 
 lazy val app3 =
