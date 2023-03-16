@@ -57,7 +57,9 @@ lazy val app3 =
     .settings(commonSettings)
     .settings(
       name := "app3",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.openTelemetryDependencies,
+      javaAgents += "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.13.0",
+      javaOptions += "-Dotel.javaagent.debug=true" // Debug OpenTelemetry Java agent
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
