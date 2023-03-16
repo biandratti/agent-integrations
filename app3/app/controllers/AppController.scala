@@ -11,7 +11,7 @@ import play.api.mvc.{
 }
 import play.twirl.api.Html
 
-class App2Controller(
+class AppController(
     cc: ControllerComponents
 ) extends AbstractController(cc)
     with Logging {
@@ -22,7 +22,7 @@ class App2Controller(
   }
 
   def index: Action[AnyContent] = Action {
-    Ok(Html("<h1>Welcome</h1><p>APP2 is ready.</p>"))
+    Ok(Html("<h1>Welcome</h1><p>APP3 is ready.</p>"))
   }
 
 }

@@ -1,32 +1,28 @@
-import _root_.controllers.AssetsComponents
 import com.softwaremill.macwire.*
 import kamon.Kamon
 import play.api.ApplicationLoader.Context
 import play.api.*
-import play.api.i18n.*
 import play.api.routing.Router
 import router.Routes
 
 /** Application loader that wires up the application dependencies using Macwire
   */
 class TraceApplicationLoader extends ApplicationLoader {
-  def load(context: Context): Application = {
-    Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
-    context.lifecycle.addStopHook { () =>
-      Kamon.stop()
-    }
-    new TraceComponents(
-      context
-    ).application
-  }
+  def load(context: Context): Application = new TraceComponents(
+    context
+  ).application
 }
 
 class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
     with TraceModule
-    with AssetsComponents
-    with I18nComponents
     with play.filters.HttpFiltersComponents {
+
+  // set up Kamon
+  Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
+  context.lifecycle.addStopHook { () =>
+    Kamon.stop()
+  }
 
   // set up logger
   LoggerConfigurator(context.environment.classLoader).foreach {

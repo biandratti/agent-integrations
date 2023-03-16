@@ -35,9 +35,10 @@ lazy val app1 =
     .settings(commonSettings)
     .settings(
       name := "app1",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies ++ Seq(
-        ws
-      )
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.kamonDependencies
+        ++ Seq(ws)
     )
 
 lazy val app2 =
@@ -47,7 +48,21 @@ lazy val app2 =
     .settings(commonSettings)
     .settings(
       name := "app2",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.kamonDependencies
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.kamonDependencies
+    )
+
+lazy val app3 =
+  project
+    .in(file("app3"))
+    .enablePlugins(PlayScala, JavaAgent)
+    .settings(commonSettings)
+    .settings(
+      name := "app3",
+      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.openTelemetryDependencies,
+      javaAgents += "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.13.0",
+      javaOptions += "-Dotel.javaagent.debug=true" // Debug OpenTelemetry Java agent
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")

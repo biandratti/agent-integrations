@@ -1,5 +1,6 @@
 package controllers
 
+import play.api.MarkerContext
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -9,20 +10,24 @@ import play.api.mvc.{
 }
 import play.twirl.api.Html
 import services.TraceService
+import utils.ContextId
+import utils.RequestMarkerContext.requestHeaderToMarkerContext
+
 import scala.concurrent.ExecutionContext
 
-class App1Controller(
+class AppController(
     traceService: TraceService,
     cc: ControllerComponents
-) extends AbstractController(cc) {
-
-  implicit val ec: ExecutionContext =
-    scala.concurrent.ExecutionContext.global // TODO...
+)(implicit ec: ExecutionContext)
+    extends AbstractController(cc)
+    with ContextId {
 
   def trace(): Action[AnyContent] =
-    Action.async {
+    Action.async { implicit request =>
+      implicit val mc: MarkerContext =
+        requestHeaderToMarkerContext(request.headers)
       traceService
-        .getApp2Trace()
+        .getApp2Trace(getCtxId(request.headers))
         .map(response => {
           Ok(Json.toJson(response))
         })

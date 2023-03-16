@@ -1,9 +1,11 @@
 import com.softwaremill.macwire.*
-import kamon.Kamon
+/*import io.opentelemetry.api.GlobalOpenTelemetry
+import io.opentelemetry.api.trace.Span
+import io.opentelemetry.sdk.OpenTelemetrySdk
+import io.opentelemetry.sdk.trace.SdkTracerProvider
+import io.opentelemetry.sdk.trace.samplers.Sampler*/
 import play.api.*
 import play.api.ApplicationLoader.Context
-import play.api.libs.ws.WSClient
-import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.routing.Router
 import router.Routes
 
@@ -17,15 +19,28 @@ class TraceApplicationLoader extends ApplicationLoader {
 
 class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
-    with AhcWSComponents
     with TraceModule
     with play.filters.HttpFiltersComponents {
 
-  // set up Kamon
-  Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
-  context.lifecycle.addStopHook { () =>
-    Kamon.stop()
-  }
+  // set up Opentelemetry
+  val openTelemetry = OpenTelemetryLoader.init("http://localhost:4317")
+
+  /*val tracer = openTelemetry.getTracer("maxi")
+  for (i <- 0 until 10) {
+    // Generate a span
+    val span: Span =
+      tracer.spanBuilder("Start my wonderful Maxi use case").startSpan
+    span.addEvent("Event 0")
+    // execute my use case - here we simulate a wait
+    try Thread.sleep(1000)
+    catch {
+      case e: InterruptedException =>
+
+      // do the right thing here
+    }
+    span.addEvent("Event 1")
+    span.end()
+  }*/
 
   // set up logger
   LoggerConfigurator(context.environment.classLoader).foreach {
@@ -37,6 +52,4 @@ class TraceComponents(context: Context)
     val prefix: String = "/"
     wire[Routes]
   }
-
-  override def ws: WSClient = wsClient
 }
