@@ -25,15 +25,15 @@ object Dependencies {
   }
 
   lazy val openTelemetryDependencies = {
-    val version = "1.11.0"
+    val version = "1.24.0"
     val alphaVersion = s"$version-alpha"
     Seq(
       "io.opentelemetry" % "opentelemetry-bom" % version pomOnly (),
       "io.opentelemetry" % "opentelemetry-api" % version,
       "io.opentelemetry" % "opentelemetry-sdk" % version,
-      // "io.opentelemetry" % "opentelemetry-sdk-logs" % version,
-      // "io.opentelemetry" % "opentelemetry-exporter-otlp-logs" % version,
-      // "io.opentelemetry" % "opentelemetry-semconv" % version,
+      "io.opentelemetry" % "opentelemetry-sdk-logs" % alphaVersion,
+      "io.opentelemetry" % "opentelemetry-exporter-otlp-logs" % alphaVersion,
+      "io.opentelemetry" % "opentelemetry-semconv" % alphaVersion % "runtime",
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % alphaVersion % "runtime",
       "io.opentelemetry" % "opentelemetry-exporter-jaeger" % version,
       "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % alphaVersion,

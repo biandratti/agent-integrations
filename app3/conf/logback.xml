@@ -1,18 +1,76 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
 <configuration>
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+
+    <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
+
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${application.home:-.}/logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${application.home:-.}/logs/bff-log-%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
         <encoder>
-            <pattern>
-                logback: %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %kvp{DOUBLE}%n
-            </pattern>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %traceID %spanID %contextTag{context-id} %logger [%mdc] - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="OpenTelemetry"
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %traceID %spanID %contextTag{context-id} %logger [%mdc] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="OPENTELEMETRY"
               class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender"
               captureMdcAttributes="true" >
     </appender>
+
+
+    <!--
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>logstash:6000</destination>
+        <keepAliveDuration>5 minutes</keepAliveDuration>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"appname": "n-sender", "environment": "default"}</customFields>
+        </encoder>
+    </appender>
+    -->
+
+    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE" />
+    </appender>
+
+    <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="STDOUT" />
+    </appender>
+
+    <!--
+    <appender name="ASYNCLOGSTASH" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="LOGSTASH" />
+    </appender>
+    -->
+
+
+    <turboFilter class="ch.qos.logback.classic.turbo.MarkerFilter">
+        <Name>TRACER_FILTER</Name>
+        <Marker>TRACER</Marker>
+        <OnMatch>ACCEPT</OnMatch>
+    </turboFilter>
+
+    <logger name="play" level="INFO" />
+    <logger name="application" level="DEBUG" />
+
     <root level="INFO">
-        <appender-ref ref="console"/>
-        <appender-ref ref="OpenTelemetry"/>
+        <appender-ref ref="ASYNCFILE" />
+        <appender-ref ref="ASYNCSTDOUT" />
+        <appender-ref ref="OPENTELEMETRY"/>
+        <!--<appender-ref ref="ASYNCLOGSTASH" />-->
     </root>
 </configuration>

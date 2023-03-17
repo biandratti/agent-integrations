@@ -1,7 +1,7 @@
 package controllers
 
+import io.opentelemetry.api.trace.Tracer
 import models.TraceResponse
-import play.api.Logging
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -10,14 +10,24 @@ import play.api.mvc.{
   ControllerComponents
 }
 import play.twirl.api.Html
+import utils.LoggerUtils
 
 class AppController(
+    tracer: Tracer,
     cc: ControllerComponents
 ) extends AbstractController(cc)
-    with Logging {
+    with LoggerUtils {
 
   def trace: Action[AnyContent] = Action {
-    logger.info("trace request")
+    runWithTrace(
+      slf4jLogger.info("trace request"),
+      tracer
+    )
+    runWithTrace(
+      slf4jLogger.info("trace request"),
+      tracer,
+      true
+    )
     Ok(Json.toJson(TraceResponse("Ok")))
   }
 
