@@ -101,8 +101,16 @@ lazy val app3 =
       libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.openTelemetryDependencies,
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
-      dockerAlias := dockerAlias.value.withTag(Some(version.value)),
-      dockerUpdateLatest := true
+      Docker / maintainer := "maxibiandra@example.com",
+      Docker / packageName := "app3",
+      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
+      Docker / daemonUserUid := None,
+      Docker / daemonUser := "daemon",
+      dockerExposedPorts := Seq(9002),
+      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerUpdateLatest := true,
+      dockerChmodType := DockerChmodType.UserGroupWriteExecute,
+      dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
     )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
