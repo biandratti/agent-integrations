@@ -25,7 +25,7 @@ object Dependencies {
   }
 
   lazy val openTelemetryDependencies = {
-    val version = "1.11.0"
+    val version = "1.24.0"
     val alphaVersion = s"$version-alpha"
     Seq(
       "io.opentelemetry" % "opentelemetry-bom" % version pomOnly (),
