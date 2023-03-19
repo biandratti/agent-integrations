@@ -2,6 +2,28 @@ version: "3"
 
 services:
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268" #used by Kamon
+      - "14250"
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector-config.yml:/otel-collector-config.yml
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "55679:55679" # zpages extension
+      - "4317:4317"
+    depends_on:
+      - jaeger
+
   app2:
     image: app2
     container_name: app2
@@ -19,4 +41,4 @@ services:
     #  - "9000:9000"
     depends_on:
       - app2
-
+      - jaeger
