@@ -10,7 +10,7 @@ import scala.concurrent.Future
 
 class TraceService(ws: WSClient) extends Logging {
 
-  private lazy val app2URL = "http://localhost:9001/api2/v1/trace"
+  private lazy val app2URL = "http://app2:9001/api2/v1/trace"
 
   def getApp2Trace(ctxId: String)(implicit
       mc: MarkerContext
@@ -22,5 +22,9 @@ class TraceService(ws: WSClient) extends Logging {
         logger.info(s"APP2 response: ${response.body}")
         response.json.as[TraceResponse]
       })
+      .recover { case ex: Exception =>
+        logger.error("app2 response", ex)
+        throw ex
+      }
   }
 }

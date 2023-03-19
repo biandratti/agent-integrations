@@ -4,6 +4,11 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    hostname: jaeger
+    restart: always
+    networks:
+      - tracenet
     ports:
       - "16686:16686"
       - "14268:14268" #used by Kamon
@@ -11,9 +16,15 @@ services:
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    hostname: otel-collector
+    restart: always
+    networks:
+      - tracenet
     command: ["--config=/otel-collector-config.yml"]
     volumes:
       - ./otel-collector-config.yml:/otel-collector-config.yml
+
     ports:
       - "1888:1888"   # pprof extension
       - "8888:8888"   # Prometheus metrics exposed by the collector
@@ -27,18 +38,25 @@ services:
   app2:
     image: app2
     container_name: app2
+    hostname: app2
     restart: always
-    network_mode: "host"
-    #ports:
-    #  - "9001:9001"
+    networks:
+      - tracenet
+    ports:
+      - "9001:9001"
 
   app1:
     image: app1
     container_name: app1
+    hostname: app1
     restart: always
-    network_mode: "host"
-    #ports:
-    #  - "9000:9000"
+    networks:
+      - tracenet
+    ports:
+      - "9000:9000"
     depends_on:
       - app2
       - jaeger
+
+networks:
+  tracenet:
