@@ -47,9 +47,9 @@ class TraceComponents(context: Context)
     _.configure(context.environment, context.initialConfiguration, Map.empty)
   }
 
+  // add the prefix string in local scope for the Routes constructor
+  lazy val prefix: String = "/"
   lazy val router: Router = {
-    // add the prefix string in local scope for the Routes constructor
-    val prefix: String = "/"
     wire[Routes]
   }
 }
