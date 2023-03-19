@@ -1,3 +1,5 @@
+import com.typesafe.sbt.packager.docker.Cmd
+
 Global / dependencyCheckFormats := Seq("HTML", "JSON")
 
 lazy val scalaV = "2.13.10"
@@ -31,26 +33,38 @@ lazy val commonSettings = Seq(
 lazy val app1 =
   project
     .in(file("app1"))
-    .enablePlugins(PlayScala, JavaAgent)
+    .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, JavaAgent)
     .settings(commonSettings)
     .settings(
       name := "app1",
+      PlayKeys.playDefaultPort := 9000,
       libraryDependencies ++= Dependencies.playDependencies
         ++ Dependencies.logstashDependencies
         ++ Dependencies.kamonDependencies
-        ++ Seq(ws)
+        ++ Seq(ws),
+      javaAgents += Dependencies.kamonAgent,
+      dockerAlias := dockerAlias.value
+        .withTag(Some(version.value)),
+      dockerCommands := makeDockerfileInstructionsForService("app1"),
+      Docker / version := "latest"
     )
 
 lazy val app2 =
   project
     .in(file("app2"))
-    .enablePlugins(PlayScala, JavaAgent)
+    .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, JavaAgent)
     .settings(commonSettings)
     .settings(
       name := "app2",
+      PlayKeys.playDefaultPort := 9001,
       libraryDependencies ++= Dependencies.playDependencies
         ++ Dependencies.logstashDependencies
-        ++ Dependencies.kamonDependencies
+        ++ Dependencies.kamonDependencies,
+      javaAgents += Dependencies.kamonAgent,
+      dockerAlias := dockerAlias.value
+        .withTag(Some(version.value)),
+      dockerCommands := makeDockerfileInstructionsForService("app2"),
+      Docker / version := "latest"
     )
 
 lazy val app3 =
@@ -64,6 +78,14 @@ lazy val app3 =
       javaAgents += "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.13.1",
       javaOptions += "-Dotel.javaagent.debug=true" // Debug OpenTelemetry Java agent
     )
+
+def makeDockerfileInstructionsForService(serviceName: String): Seq[Cmd] = Seq(
+  Cmd("FROM", "fabric8/java-alpine-openjdk11-jre"),
+  Cmd("WORKDIR", "/opt/docker"),
+  Cmd("COPY", "opt", "/opt"),
+  Cmd("RUN", "apk update && apk add bash"),
+  Cmd("ENTRYPOINT", s"/opt/docker/bin/$serviceName")
+)
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
 addCommandAlias("scapegoatLint", ";compile ;scapegoat")
