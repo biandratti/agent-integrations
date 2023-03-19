@@ -61,7 +61,7 @@ lazy val app3 =
     .settings(
       name := "app3",
       libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.openTelemetryDependencies,
-      javaAgents += "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.13.0",
+      javaAgents += "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.13.1",
       javaOptions += "-Dotel.javaagent.debug=true" // Debug OpenTelemetry Java agent
     )
 
