@@ -9,6 +9,7 @@ import io.opentelemetry.sdk.logs.`export`.BatchLogRecordProcessor
 import io.opentelemetry.sdk.resources.Resource
 import io.opentelemetry.sdk.trace.SdkTracerProvider
 import io.opentelemetry.sdk.trace.`export`.BatchSpanProcessor
+import io.opentelemetry.sdk.trace.samplers.Sampler
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes
 
 import java.util.concurrent.TimeUnit
