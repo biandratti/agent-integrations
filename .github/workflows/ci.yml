@@ -29,7 +29,7 @@ jobs:
       #- name: Scapegoat Lint
       #  run: sbt scapegoatLint
     - name: Run tests with coverage Report
-      run: sbt test
+      run: sbt testCoverage
       #    - uses: codecov/codecov-action@v3
         #      with:
         #        token: ${{ secrets.CODECOV_TOKEN }}

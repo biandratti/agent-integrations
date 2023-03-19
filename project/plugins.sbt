@@ -13,7 +13,7 @@ addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.1.1")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.10.4")
 
 //coverage
-addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.0")
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.6.1")
 
 //check vulnerability
 addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
