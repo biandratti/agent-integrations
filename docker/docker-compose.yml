@@ -35,6 +35,21 @@ services:
     depends_on:
       - jaeger
 
+  app3:
+    image: app3
+    container_name: app3
+    hostname: app3
+    restart: always
+    environment:
+      - OTEL_SERVICE_NAME=app3
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+    networks:
+      - tracenet
+    ports:
+      - "9002:9002"
+
   app2:
     image: app2
     container_name: app2
@@ -44,16 +59,6 @@ services:
       - tracenet
     ports:
       - "9001:9001"
-
-  app3:
-    image: app3
-    container_name: app3
-    hostname: app3
-    restart: always
-    networks:
-      - tracenet
-    ports:
-      - "9002:9002"
 
   app1:
     image: app1
