@@ -76,7 +76,8 @@ lazy val app2 =
       name := "app2",
       libraryDependencies ++= Dependencies.playDependencies
         ++ Dependencies.logstashDependencies
-        ++ Dependencies.kamonDependencies,
+        ++ Dependencies.kamonDependencies
+        ++ Seq(ws),
       javaAgents += Dependencies.kamonAgent,
       Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app2",
