@@ -2,6 +2,8 @@ import com.softwaremill.macwire.*
 import kamon.Kamon
 import play.api.ApplicationLoader.Context
 import play.api.*
+import play.api.libs.ws.WSClient
+import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.routing.Router
 import router.Routes
 
@@ -15,6 +17,7 @@ class TraceApplicationLoader extends ApplicationLoader {
 
 class TraceComponents(context: Context)
     extends BuiltInComponentsFromContext(context)
+    with AhcWSComponents
     with TraceModule
     with play.filters.HttpFiltersComponents {
 
@@ -34,4 +37,6 @@ class TraceComponents(context: Context)
   lazy val router: Router = {
     wire[Routes]
   }
+
+  override def ws: WSClient = wsClient
 }

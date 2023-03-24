@@ -1,16 +1,17 @@
-package services
+package service
 
 import models.TraceResponse
 import play.api.libs.ws.WSClient
 import play.api.{Logging, MarkerContext}
 import utils.ContextId
+
 import scala.concurrent.{ExecutionContext, Future}
 
 class TraceService(ws: WSClient) extends Logging {
 
-  private lazy val app2URL = "http://app2:9001/api2/v1/trace"
+  private lazy val app2URL = "http://app3:9002/api3/v1/trace"
 
-  def getApp2Trace(ctxId: String)(implicit
+  def getApp3Trace(ctxId: String)(implicit
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {

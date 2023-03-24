@@ -1,5 +1,4 @@
 import com.typesafe.sbt.packager.docker.{
-  Cmd,
   DockerChmodType,
   DockerPermissionStrategy
 }
@@ -77,7 +76,8 @@ lazy val app2 =
       name := "app2",
       libraryDependencies ++= Dependencies.playDependencies
         ++ Dependencies.logstashDependencies
-        ++ Dependencies.kamonDependencies,
+        ++ Dependencies.kamonDependencies
+        ++ Seq(ws),
       javaAgents += Dependencies.kamonAgent,
       Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app2",
@@ -94,11 +94,19 @@ lazy val app2 =
 lazy val app3 =
   project
     .in(file("app3"))
-    .enablePlugins(PlayScala, JavaAppPackaging, DockerPlugin, JavaAgent)
+    .enablePlugins(
+      PlayScala,
+      AshScriptPlugin,
+      JavaAppPackaging,
+      DockerPlugin,
+      JavaAgent
+    )
     .settings(commonSettings)
     .settings(
       name := "app3",
-      libraryDependencies ++= Dependencies.playDependencies ++ Dependencies.openTelemetryDependencies,
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.openTelemetryDependencies,
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
       Docker / maintainer := "maxibiandra@example.com",
