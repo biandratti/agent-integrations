@@ -27,7 +27,7 @@ class AppController(
       implicit val mc: MarkerContext =
         requestHeaderToMarkerContext(request.headers)
       traceService
-        .getApp2Trace(getCtxId(request.headers))
+        .getTrace(getCtxId(request.headers))
         .map(response => {
           Ok(Json.toJson(response))
         })

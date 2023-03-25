@@ -1,13 +1,6 @@
 Monitoring:
 
-Run apps without agent:
-```
-sh runApp1.sh
-sh runApp2.sh
-sh runApp3.sh
-```
-
-Run apps without agent:
+Run apps with agent:
 ```
 sbt app1/docker:publishLocal
 sbt app2/docker:publishLocal
@@ -15,14 +8,17 @@ sbt app3/docker:publishLocal
 sbt app4/docker:publishLocal
 ```
 
+### Kamon (app1, app2) test cross apps
+```
+docker/kammon/docker-compose up
+curl -i  --header "context-id: mycontextid" localhost:9001/api/v1/trace
+```
+
+### OpenTelemetry (app3, app4) test cross apps
+```
+docker/opentelemetry/docker-compose up
+curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
+```
+
 ### jaegertracing
-```
-docker-compose up
-```
-
 http://localhost:16686
-
-### test cross apps
-```
-curl -i  --header "context-id: mycontextid" localhost:9000/api1/v1/trace
-```
