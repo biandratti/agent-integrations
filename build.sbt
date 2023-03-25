@@ -106,7 +106,8 @@ lazy val app3 =
       name := "app3",
       libraryDependencies ++= Dependencies.playDependencies
         ++ Dependencies.logstashDependencies
-        ++ Dependencies.openTelemetryDependencies,
+        ++ Dependencies.openTelemetryDependencies
+        ++ Seq(ws),
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
       Docker / maintainer := "maxibiandra@example.com",
@@ -115,6 +116,36 @@ lazy val app3 =
       Docker / daemonUserUid := None,
       Docker / daemonUser := "daemon",
       dockerExposedPorts := Seq(9002),
+      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerUpdateLatest := true,
+      dockerChmodType := DockerChmodType.UserGroupWriteExecute,
+      dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
+    )
+
+lazy val app4 =
+  project
+    .in(file("app4"))
+    .enablePlugins(
+      PlayScala,
+      AshScriptPlugin,
+      JavaAppPackaging,
+      DockerPlugin,
+      JavaAgent
+    )
+    .settings(commonSettings)
+    .settings(
+      name := "app4",
+      libraryDependencies ++= Dependencies.playDependencies
+        ++ Dependencies.logstashDependencies
+        ++ Dependencies.openTelemetryDependencies,
+      javaAgents += Dependencies.openTelemetryAgent,
+      javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
+      Docker / maintainer := "maxibiandra@example.com",
+      Docker / packageName := "app4",
+      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
+      Docker / daemonUserUid := None,
+      Docker / daemonUser := "daemon",
+      dockerExposedPorts := Seq(9004),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,

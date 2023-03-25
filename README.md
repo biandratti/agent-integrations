@@ -12,6 +12,7 @@ Run apps without agent:
 sbt app1/docker:publishLocal
 sbt app2/docker:publishLocal
 sbt app3/docker:publishLocal
+sbt app4/docker:publishLocal
 ```
 
 ### jaegertracing
