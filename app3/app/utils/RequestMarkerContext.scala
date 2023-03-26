@@ -12,13 +12,8 @@ object RequestMarkerContext extends ContextId {
     messageToMarkerContext(getCtxId(requestHeader))
 
   def messageToMarkerContext(contextId: String): MarkerContext = {
-    setKamonContext(cId, contextId)
     val requestMarkers: LogstashMarker = append(cId, contextId)
     MarkerContext(requestMarkers)
-  }
-
-  private def setKamonContext(key: String, contextId: String): Unit = {
-    // Kamon.currentSpan().tag(key, contextId)
   }
 
 }

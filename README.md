@@ -25,8 +25,17 @@ http://localhost:9092/metrics
 ### OpenTelemetry (app3, app4) test cross apps
 ```
 docker/opentelemetry/docker-compose up
+```
+Testing:
+```
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
 ```
+
+Prometheus:
+
+http://localhost:9093
+
+http://localhost:9094
 
 ### jaegertracing
 http://localhost:16686

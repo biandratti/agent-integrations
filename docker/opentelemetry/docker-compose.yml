@@ -41,10 +41,14 @@ services:
       - OTEL_TRACES_EXPORTER=jaeger
       - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
       - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9094
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
     networks:
       - tracenet
     ports:
       - "9004:9004"
+      - "9094:9094"
     depends_on:
       - jaeger
 
@@ -57,10 +61,14 @@ services:
       - OTEL_TRACES_EXPORTER=jaeger
       - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
       - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9094
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
     networks:
       - tracenet
     ports:
       - "9003:9003"
+      - "9093:9094"
     depends_on:
       - app4
       - jaeger
