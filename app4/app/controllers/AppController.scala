@@ -1,7 +1,8 @@
 package controllers
 
-import kamon.Kamon
+import io.opentelemetry.api.trace.Span
 import models.TraceResponse
+import play.api.{Logging, MarkerContext}
 import play.api.libs.json.Json
 import play.api.mvc.{
   AbstractController,
@@ -9,7 +10,6 @@ import play.api.mvc.{
   AnyContent,
   ControllerComponents
 }
-import play.api.{Logging, MarkerContext}
 import play.twirl.api.Html
 import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
@@ -21,18 +21,17 @@ class AppController(
     extends AbstractController(cc)
     with Logging {
 
-  def trace(): Action[AnyContent] =
-    Action.async { implicit request =>
-      implicit val mc: MarkerContext =
-        requestHeaderToMarkerContext(request.headers)
-      logger.info("trace request")
-      Future(
-        Ok(Json.toJson(TraceResponse(Kamon.currentSpan().trace.id.string)))
-      )
-    }
+  def trace: Action[AnyContent] = Action.async { implicit request =>
+    implicit val mc: MarkerContext =
+      requestHeaderToMarkerContext(request.headers)
+    logger.info("trace request")
+    Future(
+      Ok(Json.toJson(TraceResponse(Span.current().getSpanContext.getTraceId)))
+    )
+  }
 
   def index: Action[AnyContent] = Action {
-    Ok(Html("<h1>Welcome</h1><p>APP2 is ready.</p>"))
+    Ok(Html("<h1>Welcome</h1><p>APP3 is ready.</p>"))
   }
 
 }

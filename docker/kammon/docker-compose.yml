@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    hostname: jaeger
+    restart: always
+    networks:
+      - tracenet
+    ports:
+      - "16686:16686"
+      - "14268:14268" #used by Kamon
+
+  app2:
+    image: app2
+    hostname: app2
+    restart: always
+    networks:
+      - tracenet
+    ports:
+      - "9002:9002"
+      - "9092:9095"
+    depends_on:
+      - jaeger
+
+  app1:
+    image: app1
+    hostname: app1
+    restart: always
+    networks:
+      - tracenet
+    ports:
+      - "9001:9001"
+      - "9091:9095"
+    depends_on:
+      - app2
+      - jaeger
+
+networks:
+  tracenet:

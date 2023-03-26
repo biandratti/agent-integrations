@@ -9,21 +9,21 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class TraceService(ws: WSClient) extends Logging {
 
-  private lazy val app2URL = "http://app3:9002/api3/v1/trace"
+  private lazy val apiURL = "http://app4:9004/api/v1/trace"
 
-  def getApp3Trace(ctxId: String)(implicit
+  def getTrace(ctxId: String)(implicit
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
-    ws.url(app2URL)
+    ws.url(apiURL)
       .withHttpHeaders(headers = (ContextId.cId, ctxId))
       .get()
       .map(response => {
-        logger.info(s"APP2 response: ${response.body}")
+        logger.info(s"app4 response: ${response.body}")
         response.json.as[TraceResponse]
       })
       .recover { case ex: Exception =>
-        logger.error("app2 response", ex)
+        logger.error("app4 response", ex)
         throw ex
       }
   }

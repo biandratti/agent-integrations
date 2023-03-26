@@ -4,19 +4,16 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
-    container_name: jaeger
     hostname: jaeger
     restart: always
     networks:
       - tracenet
     ports:
       - "16686:16686"
-      - "14268:14268" #used by Kamon
-      - "14250"
+      - "14250:14250" #used by OTEL
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
-    container_name: otel-collector
     hostname: otel-collector
     restart: always
     networks:
@@ -35,9 +32,28 @@ services:
     depends_on:
       - jaeger
 
+  app4:
+    image: app4
+    hostname: app4
+    restart: always
+    environment:
+      - OTEL_SERVICE_NAME=app4
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9094
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
+    networks:
+      - tracenet
+    ports:
+      - "9004:9004"
+      - "9094:9094"
+    depends_on:
+      - jaeger
+
   app3:
     image: app3
-    container_name: app3
     hostname: app3
     restart: always
     environment:
@@ -45,35 +61,16 @@ services:
       - OTEL_TRACES_EXPORTER=jaeger
       - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
       - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9094
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
     networks:
       - tracenet
     ports:
-      - "9002:9002"
-
-  app2:
-    image: app2
-    container_name: app2
-    hostname: app2
-    restart: always
-    networks:
-      - tracenet
-    ports:
-      - "9001:9001"
+      - "9003:9003"
+      - "9093:9094"
     depends_on:
-      - jaeger
-
-  app1:
-    image: app1
-    container_name: app1
-    hostname: app1
-    restart: always
-    networks:
-      - tracenet
-    ports:
-      - "9000:9000"
-    depends_on:
-      - app2
-      - app3
+      - app4
       - jaeger
 
 networks:
