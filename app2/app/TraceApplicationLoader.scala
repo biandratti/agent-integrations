@@ -19,7 +19,7 @@ class TraceComponents(context: Context)
     with play.filters.HttpFiltersComponents {
 
   // set up Kamon
-  Kamon.initWithoutAttaching(context.initialConfiguration.underlying)
+  Kamon.init(context.initialConfiguration.underlying)
   context.lifecycle.addStopHook { () =>
     Kamon.stop()
   }
