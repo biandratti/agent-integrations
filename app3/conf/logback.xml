@@ -2,13 +2,6 @@
 <configuration>
 
     <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
-    <conversionRule conversionWord="traceID" converterClass="kamon.instrumentation.logback.tools.TraceIDConverter" />
-    <conversionRule conversionWord="spanID" converterClass="kamon.instrumentation.logback.tools.SpanIDConverter" />
-    <conversionRule conversionWord="contextTag" converterClass="kamon.instrumentation.logback.tools.ContextTagConverter" />
-    <conversionRule conversionWord="contextEntry" converterClass="kamon.instrumentation.logback.tools.ContextEntryConverter" />
-
-    <appender name="COUNTER" class="kamon.instrumentation.logback.tools.EntriesCounterAppender"/>
-
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${application.home:-.}/logs/application.log</file>
@@ -18,15 +11,20 @@
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %traceID %spanID %contextTag{context-id} %logger [%mdc] - %msg%n</pattern>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %logger [%mdc] - %msg%n</pattern>
         </encoder>
     </appender>
 
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %traceID %spanID %contextTag{context-id} %logger [%mdc] - %msg%n</pattern>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",UTC} %coloredLevel [%marker] %logger [%mdc] - %msg%n</pattern>
         </encoder>
+    </appender>
+
+    <appender name="OPENTELEMETRY"
+              class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender"
+              captureMdcAttributes="true" >
     </appender>
 
 
@@ -71,7 +69,7 @@
     <root level="INFO">
         <appender-ref ref="ASYNCFILE" />
         <appender-ref ref="ASYNCSTDOUT" />
+        <appender-ref ref="OPENTELEMETRY"/>
         <!--<appender-ref ref="ASYNCLOGSTASH" />-->
     </root>
-
 </configuration>

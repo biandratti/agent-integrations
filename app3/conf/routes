@@ -1,0 +1,4 @@
+
+GET        /                         controllers.AppController.index
+GET        /api3/v1/trace            controllers.AppController.trace
+
