@@ -4,7 +4,6 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
-    container_name: jaeger
     hostname: jaeger
     restart: always
     networks:
@@ -15,7 +14,6 @@ services:
 
   app2:
     image: app2
-    container_name: app2
     hostname: app2
     restart: always
     networks:
@@ -28,7 +26,6 @@ services:
 
   app1:
     image: app1
-    container_name: app1
     hostname: app1
     restart: always
     networks:

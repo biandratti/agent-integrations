@@ -4,7 +4,6 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
-    container_name: jaeger
     hostname: jaeger
     restart: always
     networks:
@@ -15,7 +14,6 @@ services:
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
-    container_name: otel-collector
     hostname: otel-collector
     restart: always
     networks:
@@ -36,7 +34,6 @@ services:
 
   app4:
     image: app4
-    container_name: app4
     hostname: app4
     restart: always
     environment:
@@ -53,7 +50,6 @@ services:
 
   app3:
     image: app3
-    container_name: app3
     hostname: app3
     restart: always
     environment:
