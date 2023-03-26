@@ -2,7 +2,7 @@ import play.api.libs.json.{Json, OFormat}
 
 package object models {
 
-  case class TraceResponse(message: String)
+  case class TraceResponse(id: String)
 
   object TraceResponse {
     implicit val TraceResponseFormat: OFormat[TraceResponse] =

@@ -1,5 +1,6 @@
 package controllers
 
+import kamon.Kamon
 import models.TraceResponse
 import play.api.libs.json.Json
 import play.api.mvc.{
@@ -24,7 +25,10 @@ class AppController(
     Action.async { implicit request =>
       implicit val mc: MarkerContext =
         requestHeaderToMarkerContext(request.headers)
-      Future(Ok(Json.toJson(TraceResponse("Ok"))))
+      logger.info("trace request")
+      Future(
+        Ok(Json.toJson(TraceResponse(Kamon.currentSpan().trace.id.string)))
+      )
     }
 
   def index: Action[AnyContent] = Action {

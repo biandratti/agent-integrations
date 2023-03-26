@@ -12,7 +12,7 @@ sbt app4/docker:publishLocal
 ```
 docker/kammon/docker-compose up
 ```
-Testing:
+Getting trace_id: app1 -> app2
 ```
 curl -i  --header "context-id: mycontextid" localhost:9001/api/v1/trace
 ```
@@ -26,7 +26,7 @@ http://localhost:9092/metrics
 ```
 docker/opentelemetry/docker-compose up
 ```
-Testing:
+Getting trace_id: app3 -> app4
 ```
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
 ```

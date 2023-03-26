@@ -1,5 +1,6 @@
 package controllers
 
+import io.opentelemetry.api.trace.Span
 import models.TraceResponse
 import play.api.{Logging, MarkerContext}
 import play.api.libs.json.Json
@@ -24,7 +25,9 @@ class AppController(
     implicit val mc: MarkerContext =
       requestHeaderToMarkerContext(request.headers)
     logger.info("trace request")
-    Future(Ok(Json.toJson(TraceResponse("Ok"))))
+    Future(
+      Ok(Json.toJson(TraceResponse(Span.current().getSpanContext.getTraceId)))
+    )
   }
 
   def index: Action[AnyContent] = Action {
