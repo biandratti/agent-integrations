@@ -1,4 +1,6 @@
-Monitoring using Kamon and OpenTelemetry agent:
+# monitoring [![Build Status](https://github.com/biandratti/play-monitoring/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/biandratti/play-monitoring/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/biandratti/play-monitoring/branch/master/graph/badge.svg?token=MMS4N0N8KQ)](https://codecov.io/gh/biandratti/play-monitoring)
+
+Monitoring as an example using Kamon and OpenTelemetry agents:
 
 Run apps with agent:
 ```
