@@ -8,6 +8,7 @@ sbt app1/docker:publishLocal
 sbt app2/docker:publishLocal
 sbt app3/docker:publishLocal
 sbt app4/docker:publishLocal
+sbt app5/docker:publishLocal
 ```
 
 ### Kamon (app1, app2) test cross apps
@@ -28,7 +29,7 @@ http://localhost:9092/metrics
 ```
 docker/opentelemetry/docker-compose up
 ```
-Getting trace_id: app3 -> app4
+Getting trace_id: app3 -> (app4 || app5)
 ```
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
 ```
@@ -38,6 +39,8 @@ Prometheus:
 http://localhost:9093
 
 http://localhost:9094
+
+http://localhost:9095
 
 ### jaegertracing
 http://localhost:16686

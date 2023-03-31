@@ -49,11 +49,7 @@ lazy val app1 =
         ++ Dependencies.kamonDependencies
         ++ Seq(ws),
       javaAgents += Dependencies.kamonAgent,
-      Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app1",
-      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
-      Docker / daemonUserUid := None,
-      Docker / daemonUser := "daemon",
       dockerExposedPorts := Seq(9001),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -78,11 +74,7 @@ lazy val app2 =
         ++ Dependencies.logstashDependencies
         ++ Dependencies.kamonDependencies,
       javaAgents += Dependencies.kamonAgent,
-      Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app2",
-      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
-      Docker / daemonUserUid := None,
-      Docker / daemonUser := "daemon",
       dockerExposedPorts := Seq(9002),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -109,11 +101,7 @@ lazy val app3 =
         ++ Seq(ws),
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
-      Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app3",
-      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
-      Docker / daemonUserUid := None,
-      Docker / daemonUser := "daemon",
       dockerExposedPorts := Seq(9003),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -139,17 +127,36 @@ lazy val app4 =
         ++ Dependencies.openTelemetryDependencies,
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
-      Docker / maintainer := "maxibiandra@example.com",
       Docker / packageName := "app4",
-      Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
-      Docker / daemonUserUid := None,
-      Docker / daemonUser := "daemon",
       dockerExposedPorts := Seq(9004),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,
       dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
     )
+
+lazy val app5 = project
+  .in(file("app5"))
+  .enablePlugins(
+    AshScriptPlugin,
+    JavaAppPackaging,
+    DockerPlugin,
+    JavaAgent
+  )
+  .settings(commonSettings)
+  .settings(
+    name := "app5",
+    libraryDependencies ++= Dependencies.zioDependencies,
+    javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
+    javaAgents += Dependencies.openTelemetryAgent,
+    Docker / packageName := "app5",
+    Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
+    dockerExposedPorts := Seq(9005),
+    dockerBaseImage := "openjdk:8-jre-alpine",
+    dockerUpdateLatest := true,
+    dockerChmodType := DockerChmodType.UserGroupWriteExecute,
+    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
+  )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
 addCommandAlias("scapegoatLint", ";compile ;scapegoat")

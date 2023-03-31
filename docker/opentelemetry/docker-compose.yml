@@ -32,6 +32,26 @@ services:
     depends_on:
       - jaeger
 
+  app5:
+    image: app5
+    hostname: app5
+    restart: always
+    environment:
+      - OTEL_SERVICE_NAME=app5
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      - OTEL_EXPORTER_JAEGER_TIMEOUT=10000
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9095
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
+    networks:
+      - tracenet
+    ports:
+      - "9005:9005"
+      - "9095:9095"
+    depends_on:
+      - jaeger
+
   app4:
     image: app4
     hostname: app4
@@ -71,6 +91,7 @@ services:
       - "9093:9094"
     depends_on:
       - app4
+      - app5
       - jaeger
 
 networks:
