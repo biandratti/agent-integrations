@@ -1,18 +1,31 @@
 package utils
 
+import io.opentelemetry.api.trace.Span
 import zhttp.http.Request
 import zio.*
 
 object LogAspect {
 
-  def logSpan(
-      label: String
-  ): ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] =
+  def logSpan(): ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] =
     new ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] {
       override def apply[R, E, A](zio: ZIO[R, E, A])(implicit
           trace: Trace
       ): ZIO[R, E, A] =
-        ZIO.logSpan(label)(zio)
+        spanCorrelationId().flatMap(id => ZIO.logAnnotate("span_id", id)(zio))
+
+      def spanCorrelationId(): UIO[String] =
+        ZIO.succeed(Span.current().getSpanContext.getSpanId)
+    }
+
+  def logTrace(): ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] =
+    new ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] {
+      override def apply[R, E, A](zio: ZIO[R, E, A])(implicit
+          trace: Trace
+      ): ZIO[R, E, A] =
+        traceCorrelationId().flatMap(id => ZIO.logAnnotate("trace_id", id)(zio))
+
+      def traceCorrelationId(): UIO[String] =
+        ZIO.succeed(Span.current().getSpanContext.getTraceId)
     }
 
   def logAnnotateCorrelationId(

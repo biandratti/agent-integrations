@@ -147,7 +147,7 @@ lazy val app5 = project
   .settings(
     name := "app5",
     libraryDependencies ++= Dependencies.zioDependencies
-      ++ Dependencies.logstashDependencies,
+      ++ Dependencies.openTelemetryDependencies,
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
     Docker / packageName := "app5",
