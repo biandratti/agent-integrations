@@ -7,7 +7,7 @@ import zio.logging.backend.SLF4J
 
 object MainApp extends ZIOAppDefault {
 
-  private val globalOpenTelemetry = ZLayer.succeed(GlobalOpenTelemetry.get())
+  val globalOpenTelemetry = GlobalOpenTelemetry.get()
 
   override val bootstrap = SLF4J.slf4j(LogLevel.All, LogFormat.colored)
 
@@ -16,9 +16,5 @@ object MainApp extends ZIOAppDefault {
       .start(
         port = 9005,
         http = AppController() ++ HomeController()
-      )
-      .provide(
-        // set up Opentelemetry
-        globalOpenTelemetry
       )
 }
