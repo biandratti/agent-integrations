@@ -25,7 +25,7 @@ http://localhost:9091/metrics
 
 http://localhost:9092/metrics
 
-### OpenTelemetry (app3, app4) test cross apps
+### OpenTelemetry (app3, app4, app5) test cross apps
 ```
 docker/opentelemetry/docker-compose up
 ```
