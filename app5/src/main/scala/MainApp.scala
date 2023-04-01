@@ -1,4 +1,4 @@
-import controllers.AppController
+import controllers.{AppController, HomeController}
 import io.opentelemetry.api.GlobalOpenTelemetry
 import zhttp.service.Server
 import zio.*
@@ -15,7 +15,7 @@ object MainApp extends ZIOAppDefault {
     Server
       .start(
         port = 9005,
-        http = AppController()
+        http = AppController() ++ HomeController()
       )
       .provide(
         // set up Opentelemetry

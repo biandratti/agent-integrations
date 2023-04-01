@@ -30,11 +30,11 @@ class TraceService(ws: WSClient) extends Logging {
       .withHttpHeaders(headers = (ContextId.cId, ctxId))
       .get()
       .map(response => {
-        logger.info(s"app4 response: ${response.body}")
+        logger.info(s"$url response: ${response.body}")
         response.json.as[TraceResponse]
       })
       .recover { case ex: Exception =>
-        logger.error("app4 response", ex)
+        logger.error(s"$url response", ex)
         throw ex
       }
   }
