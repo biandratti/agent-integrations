@@ -5,7 +5,7 @@ import play.api.mvc.Headers
 import utils.ContextId.cId
 
 object ContextId {
-  lazy val cId = "context-id"
+  lazy val cId = "context-id" // TODO: choose correlation-id in all the solution
 }
 
 trait ContextId extends Logging {

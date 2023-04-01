@@ -11,7 +11,7 @@ object RequestMarkerContext extends ContextId {
   def requestHeaderToMarkerContext(requestHeader: Headers): MarkerContext =
     messageToMarkerContext(getCtxId(requestHeader))
 
-  def messageToMarkerContext(contextId: String): MarkerContext = {
+  private def messageToMarkerContext(contextId: String): MarkerContext = {
     val requestMarkers: LogstashMarker = append(cId, contextId)
     MarkerContext(requestMarkers)
   }

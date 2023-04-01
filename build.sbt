@@ -49,7 +49,6 @@ lazy val app1 =
         ++ Dependencies.kamonDependencies
         ++ Seq(ws),
       javaAgents += Dependencies.kamonAgent,
-      Docker / packageName := "app1",
       dockerExposedPorts := Seq(9001),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -74,7 +73,6 @@ lazy val app2 =
         ++ Dependencies.logstashDependencies
         ++ Dependencies.kamonDependencies,
       javaAgents += Dependencies.kamonAgent,
-      Docker / packageName := "app2",
       dockerExposedPorts := Seq(9002),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -101,7 +99,6 @@ lazy val app3 =
         ++ Seq(ws),
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
-      Docker / packageName := "app3",
       dockerExposedPorts := Seq(9003),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -127,7 +124,6 @@ lazy val app4 =
         ++ Dependencies.openTelemetryDependencies,
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
-      Docker / packageName := "app4",
       dockerExposedPorts := Seq(9004),
       dockerBaseImage := "openjdk:8-jre-alpine",
       dockerUpdateLatest := true,
@@ -146,11 +142,10 @@ lazy val app5 = project
   .settings(commonSettings)
   .settings(
     name := "app5",
-    libraryDependencies ++= Dependencies.zioDependencies,
+    libraryDependencies ++= Dependencies.zioDependencies
+      ++ Dependencies.openTelemetryDependencies,
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
-    Docker / packageName := "app5",
-    Docker / version := sys.env.getOrElse("BUILD_NUMBER", "0"),
     dockerExposedPorts := Seq(9005),
     dockerBaseImage := "openjdk:8-jre-alpine",
     dockerUpdateLatest := true,
