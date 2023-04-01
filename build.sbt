@@ -7,7 +7,7 @@ Global / dependencyCheckFormats := Seq("HTML", "JSON")
 
 lazy val scalaV = "2.13.10"
 scalaVersion := scalaV
-name := """play-monitoring"""
+name := """agents"""
 organization := "com.example"
 
 version := "1.0-SNAPSHOT"
