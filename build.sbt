@@ -144,6 +144,7 @@ lazy val app5 = project
     name := "app5",
     libraryDependencies ++= Dependencies.zioDependencies
       ++ Dependencies.openTelemetryDependencies,
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
     dockerExposedPorts := Seq(9005),
