@@ -49,7 +49,8 @@ http://localhost:9095
 ### jaegertracing
 http://localhost:16686
 
-Getting simulation:
+Get simulation using Kamon (port=9000) or OpenTelemetry (port=9003):
 ```
-sbt Gatling/test
+sbt -Dusers=1 -Dramp=1 -Dport=9000 Gatling/test
+sbt -Dusers=1 -Dramp=1 -Dport=9003 Gatling/test
 ```
