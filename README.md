@@ -48,3 +48,8 @@ http://localhost:9095
 
 ### jaegertracing
 http://localhost:16686
+
+Getting simulation:
+```
+sbt Gatling/test
+```

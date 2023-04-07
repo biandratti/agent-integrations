@@ -17,3 +17,6 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.6.1")
 
 //check vulnerability
 addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
+
+//gatling
+addSbtPlugin("io.gatling" % "gatling-sbt" % "4.3.0")

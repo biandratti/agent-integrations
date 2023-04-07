@@ -154,6 +154,14 @@ lazy val app5 = project
     dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
   )
 
+lazy val gatling = project
+  .in(file("gatling"))
+  .enablePlugins(GatlingPlugin)
+  .settings(commonSettings)
+  .settings(
+    libraryDependencies ++= Dependencies.gatling
+  )
+
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")
 addCommandAlias("scapegoatLint", ";compile ;scapegoat")
 addCommandAlias("scalafixLint", ";compile ;scalafix")
