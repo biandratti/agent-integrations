@@ -16,7 +16,7 @@ object Dependencies {
       "dev.zio" %% "zio-logging-slf4j" % "2.0.0-RC10",
       "ch.qos.logback" % "logback-classic" % "1.4.6",
       "dev.zio" %% "zio-json" % "0.3.0-RC8",
-      "io.d11" %% "zhttp" % "2.0.0-RC11"
+      "io.d11" %% "zhttp" % "2.0.0-RC9"
     )
   }
 
