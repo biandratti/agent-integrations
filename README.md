@@ -10,6 +10,10 @@ sbt app3/docker:publishLocal
 sbt app4/docker:publishLocal
 sbt app5/docker:publishLocal
 ```
+or build all the apps images 
+```
+./docker/build-apps.sh
+```
 
 ### Kamon (app1, app2) test cross apps
 ```
@@ -44,3 +48,9 @@ http://localhost:9095
 
 ### jaegertracing
 http://localhost:16686
+
+Get simulation using Kamon (port=9000) or OpenTelemetry (port=9003):
+```
+sbt -Dusers=1 -Dramp=1 -Dport=9000 Gatling/test
+sbt -Dusers=1 -Dramp=1 -Dport=9003 Gatling/test
+```

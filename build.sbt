@@ -144,6 +144,7 @@ lazy val app5 = project
     name := "app5",
     libraryDependencies ++= Dependencies.zioDependencies
       ++ Dependencies.openTelemetryDependencies,
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
     dockerExposedPorts := Seq(9005),
@@ -151,6 +152,14 @@ lazy val app5 = project
     dockerUpdateLatest := true,
     dockerChmodType := DockerChmodType.UserGroupWriteExecute,
     dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
+  )
+
+lazy val gatling = project
+  .in(file("gatling"))
+  .enablePlugins(GatlingPlugin)
+  .settings(commonSettings)
+  .settings(
+    libraryDependencies ++= Dependencies.gatling
   )
 
 addCommandAlias("checkFormat", ";scalafmtSbtCheck ;scalafmtCheckAll")

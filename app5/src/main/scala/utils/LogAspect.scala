@@ -32,14 +32,25 @@ object LogAspect {
       req: Request
   ): ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] =
     new ZIOAspect[Nothing, Any, Nothing, Any, Nothing, Any] {
+      lazy val cId = "context-id"
+
       override def apply[R, E, A](
           zio: ZIO[R, E, A]
-      )(implicit trace: Trace): ZIO[R, E, A] =
-        correlationId(req).flatMap(id => ZIO.logAnnotate("context-id", id)(zio))
+      )(implicit trace: Trace): ZIO[R, E, A] = {
+        setSpanAttribute(req)
+        correlationId(req).flatMap(id => ZIO.logAnnotate(cId, id)(zio))
+      }
 
-      def correlationId(req: Request): UIO[String] =
+      private def correlationId(req: Request): UIO[String] =
         ZIO
-          .succeed(req.header("context-id").map(_._2.toString))
+          .succeed(req.header(cId).map(_._2.toString))
           .flatMap(x => Random.nextUUID.map(uuid => x.getOrElse(uuid.toString)))
+
+      private def setSpanAttribute(req: Request): Option[Span] = {
+        req
+          .header(cId)
+          .map(_._2.toString)
+          .map(contextId => Span.current().setAttribute(cId, contextId))
+      }
     }
 }

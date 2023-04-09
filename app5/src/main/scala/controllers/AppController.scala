@@ -8,7 +8,7 @@ import zio.ZIO
 import zio.json.*
 
 object AppController {
-  def apply(): Http[Any, Throwable, Request, Response] =
+  val routes: Http[Any, Throwable, Request, Response] =
     Http.collectZIO[Request] {
 
       case req @ (Method.GET -> !! / "api" / "v1" / "trace") =>

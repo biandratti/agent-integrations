@@ -1,5 +1,6 @@
 package utils
 
+import io.opentelemetry.api.trace.Span
 import net.logstash.logback.marker.LogstashMarker
 import net.logstash.logback.marker.Markers.*
 import play.api.MarkerContext
@@ -12,8 +13,13 @@ object RequestMarkerContext extends ContextId {
     messageToMarkerContext(getCtxId(requestHeader))
 
   private def messageToMarkerContext(contextId: String): MarkerContext = {
+    setSpanAttribute(cId, contextId)
     val requestMarkers: LogstashMarker = append(cId, contextId)
     MarkerContext(requestMarkers)
+  }
+
+  private def setSpanAttribute(key: String, contextId: String): Unit = {
+    Span.current().setAttribute(key, contextId)
   }
 
 }
