@@ -36,6 +36,7 @@ docker/opentelemetry/docker-compose up
 Getting trace_id: app3 -> (app4 || app5)
 ```
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
+curl -i  --header "context-id: error" localhost:9003/api/v1/trace
 ```
 
 Prometheus:
