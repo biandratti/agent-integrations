@@ -13,7 +13,7 @@ sbt app5/docker:publishLocal
 ```
 or build all the apps images 
 ```
-./docker/build-apps.sh
+./build-apps.sh
 ```
 
 ## Kamon (app1, app2) test cross apps

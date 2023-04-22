@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ..
+
 echo "building app1 **************"
 sbt app1/docker:publishLocal
 echo "building app2 **************"
@@ -10,4 +10,3 @@ echo "building app4 **************"
 sbt app4/docker:publishLocal
 echo "building app5 **************"
 sbt app5/docker:publishLocal
-cd docker
