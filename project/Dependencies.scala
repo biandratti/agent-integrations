@@ -67,7 +67,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.9.3"
+    val version = "3.9.5"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
@@ -78,5 +78,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.17"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.25.1"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.26.0"
 }
