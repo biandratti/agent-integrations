@@ -26,7 +26,7 @@ object Dependencies {
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2",
-      "net.logstash.logback" % "logstash-logback-encoder" % "7.3"
+      "net.logstash.logback" % "logstash-logback-encoder" % "7.4"
     )
   }
 
