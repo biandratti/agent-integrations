@@ -2,7 +2,7 @@
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.19")
 
 //Agents (Kanela and Opentelemetry)
-addSbtPlugin("com.lightbend.sbt" % "sbt-javaagent" % "0.1.6")
+addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.7")
 
 //scala-fmt
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.0")
@@ -19,4 +19,4 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.8")
 addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
 
 //gatling
-addSbtPlugin("io.gatling" % "gatling-sbt" % "4.3.3")
+addSbtPlugin("io.gatling" % "gatling-sbt" % "4.4.0")

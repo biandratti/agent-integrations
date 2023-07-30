@@ -26,12 +26,12 @@ object Dependencies {
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2",
-      "net.logstash.logback" % "logstash-logback-encoder" % "7.3"
+      "net.logstash.logback" % "logstash-logback-encoder" % "7.4"
     )
   }
 
   lazy val kamonDependencies: Seq[ModuleID] = {
-    val kamonVersion = "2.6.1"
+    val kamonVersion = "2.6.3"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
       "io.kamon" %% "kamon-prometheus" % kamonVersion,
@@ -58,7 +58,7 @@ object Dependencies {
   }*/
 
   lazy val openTelemetryDependencies = {
-    val version = "1.26.0"
+    val version = "1.28.0"
     val alphaVersion = s"$version-alpha"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
@@ -78,5 +78,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.17"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.27.0"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.28.0"
 }
