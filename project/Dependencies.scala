@@ -4,7 +4,7 @@ object Dependencies {
 
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
-      "com.softwaremill.macwire" %% "macros" % "2.5.8" % "provided",
+      "com.softwaremill.macwire" %% "macros" % "2.5.9" % "provided",
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
     )
   }
@@ -78,5 +78,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.17"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.28.0"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "1.29.0"
 }
