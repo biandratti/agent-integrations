@@ -5,7 +5,7 @@ import com.typesafe.sbt.packager.docker.{
 
 Global / dependencyCheckFormats := Seq("HTML", "JSON")
 
-lazy val scalaV = "2.13.11"
+lazy val scalaV = "2.13.10"
 scalaVersion := scalaV
 name := """agents"""
 organization := "com.example"
