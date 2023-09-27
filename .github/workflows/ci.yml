@@ -17,7 +17,17 @@ env:
   JAVA_VERSION: '1.11.0.19'
 
 jobs:
-  format_compile_lint:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: coursier/setup-action@v1
+        with:
+          jvm: temurin:${{env.JAVA_VERSION}}
+          apps: sbt
+      - name: Compile
+        run: sbt compile
+  format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,6 +37,14 @@ jobs:
           apps: sbt
       - name: Check format
         run: sbt checkFormat
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: coursier/setup-action@v1
+        with:
+          jvm: temurin:${{env.JAVA_VERSION}}
+          apps: sbt
       - name: Scalafix Lint
         run: sbt scalafixLint
       - name: Scapegoat Lint
