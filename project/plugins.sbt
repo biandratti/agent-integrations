@@ -5,7 +5,7 @@ addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.19")
 addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.7")
 
 //scala-fmt
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
 
 //lints
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.1.4")
