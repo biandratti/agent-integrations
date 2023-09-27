@@ -5,11 +5,12 @@ addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.19")
 addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.7")
 
 //scala-fmt
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
 
 //lints
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.1.3")
-addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.1")
+
+addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.2")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.11.1")
 
 //coverage
