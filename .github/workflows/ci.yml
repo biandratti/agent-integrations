@@ -13,14 +13,18 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  JAVA_VERSION: '1.11.0.19'
+
 jobs:
   format_compile_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: VirtusLab/scala-cli-setup@v0.2.1
+      - uses: coursier/setup-action@v1
         with:
-          jvm: adopt:11
+          jvm: temurin:${{env.JAVA_VERSION}}
+          apps: sbt
       - name: Check format
         run: sbt checkFormat
       - name: Scalafix Lint
@@ -31,9 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: VirtusLab/scala-cli-setup@v0.2.1
+      - uses: coursier/setup-action@v1
         with:
-          jvm: adopt:11
+          jvm: temurin:${{env.JAVA_VERSION}}
+          apps: sbt
       - name: Run tests with coverage Report
         run: sbt testCoverage
       - uses: codecov/codecov-action@v3
