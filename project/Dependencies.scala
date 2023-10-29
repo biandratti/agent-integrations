@@ -5,7 +5,7 @@ object Dependencies {
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
       "com.softwaremill.macwire" %% "macros" % "2.5.9" % "provided",
-      "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+      "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.0" % Test
     )
   }
 
