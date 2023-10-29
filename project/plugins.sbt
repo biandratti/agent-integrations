@@ -2,7 +2,7 @@
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.8.19")
 
 //Agents (Kanela and Opentelemetry)
-addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.7")
+addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
 
 //scala-fmt
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
