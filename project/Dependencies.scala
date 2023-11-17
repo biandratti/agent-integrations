@@ -31,7 +31,7 @@ object Dependencies {
   }
 
   lazy val kamonDependencies: Seq[ModuleID] = {
-    val kamonVersion = "2.6.5"
+    val kamonVersion = "2.6.6"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
       "io.kamon" %% "kamon-prometheus" % kamonVersion,
