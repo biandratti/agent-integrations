@@ -21,6 +21,7 @@ addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
 //gatling
 addSbtPlugin("io.gatling" % "gatling-sbt" % "4.7.0")
 
+//https://github.com/scala/bug/issues/12632
 ThisBuild / libraryDependencySchemes ++= Seq(
   "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
 )
