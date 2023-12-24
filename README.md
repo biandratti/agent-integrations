@@ -13,14 +13,14 @@ sbt app5/docker:publishLocal
 ```
 or build all the apps images 
 ```
-./build-apps.sh
+./docker/build-apps.sh
 ```
 
 ## Kamon (app1, app2) test cross apps
 
 ![image](https://user-images.githubusercontent.com/72261652/233176385-0f874b19-99e4-4232-a5c0-a21362c5df9f.png)
 ```
-docker/kammon/docker-compose up
+docker/kammon/docker compose up
 ```
 #### Getting trace_id: app1 -> app2
 ```
@@ -36,7 +36,7 @@ http://localhost:9092/metrics
 
 ![image](https://user-images.githubusercontent.com/72261652/233178921-9a1bc156-f133-4702-9698-14b8453354cd.png)
 ```
-docker/opentelemetry/docker-compose up
+docker/opentelemetry/docker compose up
 ```
 Getting trace_id: app3 -> (app4 || app5)
 ```

@@ -5,7 +5,7 @@ object Dependencies {
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
       "com.softwaremill.macwire" %% "macros" % "2.5.9" % "provided",
-      "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+      "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.1" % Test
     )
   }
 
@@ -67,7 +67,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.9.5"
+    val version = "3.10.3"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
