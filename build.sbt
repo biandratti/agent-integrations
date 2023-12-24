@@ -11,6 +11,7 @@ name := """agents"""
 organization := "com.example"
 
 version := "1.0-SNAPSHOT"
+lazy val dockerBaseImageName = "adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine"
 
 lazy val commonSettings = Seq(
   organization := "biandratti",
@@ -49,7 +50,7 @@ lazy val app1 =
         ++ Seq(ws),
       javaAgents += Dependencies.kamonAgent,
       dockerExposedPorts := Seq(9001),
-      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerBaseImage := dockerBaseImageName,
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,
       dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
@@ -73,7 +74,7 @@ lazy val app2 =
         ++ Dependencies.kamonDependencies,
       javaAgents += Dependencies.kamonAgent,
       dockerExposedPorts := Seq(9002),
-      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerBaseImage := dockerBaseImageName,
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,
       dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
@@ -99,7 +100,7 @@ lazy val app3 =
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
       dockerExposedPorts := Seq(9003),
-      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerBaseImage := dockerBaseImageName,
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,
       dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
@@ -124,7 +125,7 @@ lazy val app4 =
       javaAgents += Dependencies.openTelemetryAgent,
       javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
       dockerExposedPorts := Seq(9004),
-      dockerBaseImage := "openjdk:8-jre-alpine",
+      dockerBaseImage := dockerBaseImageName,
       dockerUpdateLatest := true,
       dockerChmodType := DockerChmodType.UserGroupWriteExecute,
       dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
@@ -147,7 +148,7 @@ lazy val app5 = project
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
     dockerExposedPorts := Seq(9005),
-    dockerBaseImage := "openjdk:8-jre-alpine",
+    dockerBaseImage := dockerBaseImageName,
     dockerUpdateLatest := true,
     dockerChmodType := DockerChmodType.UserGroupWriteExecute,
     dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
