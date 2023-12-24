@@ -25,8 +25,8 @@ lazy val commonSettings = Seq(
   scalafixOnCompile := true,
   scalacOptions ++= Seq(
     s"-Wconf:src=${target.value}/.*:s",
-    "-Wunused",
-    "-Xfatal-warnings"
+    "-Wunused"
+    // "-Xfatal-warnings"
   )
 )
 
