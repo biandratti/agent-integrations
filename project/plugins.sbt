@@ -1,5 +1,5 @@
 //play framework
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.9.1")
+addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.1")
 
 //Agents (Kanela and Opentelemetry)
 addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
