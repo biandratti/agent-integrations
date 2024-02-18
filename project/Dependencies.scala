@@ -14,7 +14,7 @@ object Dependencies {
       "dev.zio" %% "zio" % "2.0.0-RC6",
       "dev.zio" %% "zio-logging" % "2.0.0-RC10",
       "dev.zio" %% "zio-logging-slf4j" % "2.0.0-RC10",
-      "ch.qos.logback" % "logback-classic" % "1.4.14",
+      "ch.qos.logback" % "logback-classic" % "1.5.0",
       "dev.zio" %% "zio-json" % "0.3.0-RC8",
       "io.d11" %% "zhttp" % "2.0.0-RC9",
       "dev.zio" %% "zio-test" % "2.0.10" % Test,
@@ -78,5 +78,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.18"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "2.0.0"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "2.1.0"
 }
