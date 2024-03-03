@@ -9,7 +9,7 @@ addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
 
 //lints
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.1.6")
-addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.2")
+addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.3")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.11.1")
 
 //coverage
