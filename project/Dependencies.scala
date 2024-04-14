@@ -14,7 +14,7 @@ object Dependencies {
       "dev.zio" %% "zio" % "2.0.0-RC6",
       "dev.zio" %% "zio-logging" % "2.0.0-RC10",
       "dev.zio" %% "zio-logging-slf4j" % "2.0.0-RC10",
-      "ch.qos.logback" % "logback-classic" % "1.5.3",
+      "ch.qos.logback" % "logback-classic" % "1.5.5",
       "dev.zio" %% "zio-json" % "0.3.0-RC8",
       "io.d11" %% "zhttp" % "2.0.0-RC9",
       "dev.zio" %% "zio-test" % "2.0.10" % Test,
@@ -25,7 +25,7 @@ object Dependencies {
 
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.16.2",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.0",
       "net.logstash.logback" % "logstash-logback-encoder" % "7.4"
     )
   }
@@ -67,7 +67,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.10.4"
+    val version = "3.10.5"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
@@ -78,5 +78,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.18"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "2.1.0"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "2.3.0"
 }
