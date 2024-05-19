@@ -4,7 +4,7 @@ import zhttp.http._
 import zio.test.*
 
 object HealthCheckControllerSpec extends ZIOSpecDefault {
-  def spec =
+  def spec: Spec[Any, Option[Nothing]] =
     suite("HealthCheckControllerSpec")(
       test("ok status") {
         HealthCheckController
