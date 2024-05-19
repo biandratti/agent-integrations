@@ -5,8 +5,6 @@ import com.typesafe.sbt.packager.docker.{
 
 Global / dependencyCheckFormats := Seq("HTML", "JSON")
 
-lazy val scalaV = "2.13.11"
-scalaVersion := scalaV
 name := """agents"""
 organization := "com.example"
 
@@ -15,9 +13,9 @@ lazy val dockerBaseImageName = "adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine"
 
 lazy val commonSettings = Seq(
   organization := "biandratti",
-  scalaVersion := scalaV,
+  scalaVersion := "2.13.14",
   scalacOptions += "-Xsource:3",
-  ThisBuild / scapegoatVersion := "2.1.4",
+  // ThisBuild / scapegoatVersion := "2.1.4",
   // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
   // wartremoverExcluded ++= (Compile / routes).value,
   coverageFailOnMinimum := true,

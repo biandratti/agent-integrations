@@ -5,7 +5,7 @@ object Dependencies {
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
       "com.softwaremill.macwire" %% "macros" % "2.5.9" % "provided",
-      "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.1" % Test
+      "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
     )
   }
 
@@ -15,7 +15,7 @@ object Dependencies {
       "dev.zio" %% "zio-logging" % "2.0.0-RC10",
       "dev.zio" %% "zio-logging-slf4j" % "2.0.0-RC10",
       "ch.qos.logback" % "logback-classic" % "1.5.6",
-      "dev.zio" %% "zio-json" % "0.3.0-RC8",
+      "dev.zio" %% "zio-json" % "0.6.2",
       "io.d11" %% "zhttp" % "2.0.0-RC9",
       "dev.zio" %% "zio-test" % "2.0.10" % Test,
       "dev.zio" %% "zio-test-sbt" % "2.0.10" % Test,
@@ -39,30 +39,11 @@ object Dependencies {
     )
   }
 
-  /*lazy val openTelemetryDependencies = {
-    val version = "1.24.0"
-    val alphaVersion = s"$version-alpha"
-    Seq(
-      "io.opentelemetry" % "opentelemetry-bom" % version pomOnly (),
-      "io.opentelemetry" % "opentelemetry-api" % version,
-      "io.opentelemetry" % "opentelemetry-sdk" % version,
-      "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % alphaVersion % "runtime",
-      "io.opentelemetry" % "opentelemetry-exporter-jaeger" % version,
-      "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % alphaVersion,
-      "io.opentelemetry" % "opentelemetry-exporter-prometheus" % alphaVersion,
-      // "io.opentelemetry" % "opentelemetry-exporter-zipkin" % version,
-      "io.opentelemetry" % "opentelemetry-exporter-jaeger" % version,
-      "io.opentelemetry" % "opentelemetry-exporter-otlp" % version,
-      "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % version % "runtime"
-    )
-  }*/
-
   lazy val openTelemetryDependencies = {
-    val version = "1.32.0"
-    val alphaVersion = s"$version-alpha"
+    val version = "1.38.0"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
-      "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % alphaVersion % "runtime"
+      "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % "2.4.0-alpha" % "runtime"
     )
   }
 
