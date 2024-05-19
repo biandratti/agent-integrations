@@ -10,7 +10,7 @@ object MainApp extends ZIOAppDefault {
   val globalOpenTelemetry = GlobalOpenTelemetry.get()
 
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Any] =
-    SLF4J.slf4j(LogLevel.All, LogFormat.colored)
+    SLF4J.slf4j(LogFormat.colored)
 
   override def run: ZIO[Any, Throwable, Nothing] =
     Server

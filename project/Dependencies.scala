@@ -11,15 +11,15 @@ object Dependencies {
 
   lazy val zioDependencies: Seq[ModuleID] = {
     Seq(
-      "dev.zio" %% "zio" % "2.0.0-RC6",
-      "dev.zio" %% "zio-logging" % "2.0.0-RC10",
-      "dev.zio" %% "zio-logging-slf4j" % "2.0.0-RC10",
+      "dev.zio" %% "zio" % "2.1.1",
+      "dev.zio" %% "zio-logging" % "2.2.4",
+      "dev.zio" %% "zio-logging-slf4j" % "2.2.4",
       "ch.qos.logback" % "logback-classic" % "1.5.6",
       "dev.zio" %% "zio-json" % "0.6.2",
-      "io.d11" %% "zhttp" % "2.0.0-RC9",
-      "dev.zio" %% "zio-test" % "2.0.10" % Test,
-      "dev.zio" %% "zio-test-sbt" % "2.0.10" % Test,
-      "dev.zio" %% "zio-test-magnolia" % "2.0.10" % Test
+      "io.d11" %% "zhttp" % "2.0.0-RC11",
+      "dev.zio" %% "zio-test" % "2.1.1" % Test,
+      "dev.zio" %% "zio-test-sbt" % "2.1.1" % Test,
+      "dev.zio" %% "zio-test-magnolia" % "2.1.1" % Test
     )
   }
 
