@@ -1,61 +1,62 @@
-# Observability & Distributed Tracing [![Build Status](https://github.com/biandratti/agents/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/biandratti/agents/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/biandratti/agents/branch/master/graph/badge.svg?token=MMS4N0N8KQ)](https://codecov.io/gh/biandratti/agents)
+# Comprehensive Observability and Distributed Tracing with Kamon and OpenTelemetry [![Build Status](https://github.com/biandratti/agents/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/biandratti/agents/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/biandratti/agents/branch/master/graph/badge.svg?token=MMS4N0N8KQ)](https://codecov.io/gh/biandratti/agents)
 
-Monitoring as an example using Kamon and OpenTelemetry agents in applications built on Play framework and ZIO Http.
-The main idea of this example is to reproduce the traceability concept for different scala frameworks and different telemetry options.
+This repository demonstrates how to implement monitoring and tracing in applications built with the Play Framework and ZIO Http using Kamon and OpenTelemetry agents. 
+The main goal is to showcase the concept of traceability across different Scala frameworks and telemetry options.
 
-#### Run apps with agent:
-```
-sbt app1/docker:publishLocal
-sbt app2/docker:publishLocal
-sbt app3/docker:publishLocal
-sbt app4/docker:publishLocal
-sbt app5/docker:publishLocal
-```
-or build all the apps images 
+#### Build all the apps images 
 ```
 ./docker/build-apps.sh
 ```
 
-## Kamon (app1, app2) test cross apps
+---
+### Example 1: Kamon agent
 
-![image](https://user-images.githubusercontent.com/72261652/233176385-0f874b19-99e4-4232-a5c0-a21362c5df9f.png)
+* app1 and app2 are Play Framework applications.
+* Both apps use Kamon for monitoring.
+* Kamon sends tracing data to Jaeger.
+* Kamon also sends metrics to Prometheus.
+* Prometheus: 
+  * http://localhost:9091/metrics
+  * http://localhost:9092/metrics
+* jaeger: http://localhost:16686
+
 ```
-docker/kammon/docker compose up
+cd docker/kammon && docker compose up
 ```
 #### Getting trace_id: app1 -> app2
+In the example, the user sends a request to app1 and the same trace id is sent and distributed to app2.
 ```
 curl -i  --header "context-id: mycontextid" localhost:9001/api/v1/trace
 ```
-#### Prometheus:
 
-http://localhost:9091/metrics
+<img width="300" src="https://user-images.githubusercontent.com/72261652/233176385-0f874b19-99e4-4232-a5c0-a21362c5df9f.png" />
 
-http://localhost:9092/metrics
+---
+### Example 2: OpenTelemetry agent
 
-## OpenTelemetry (app3, app4, app5) test cross apps
+* app3 and app4 are Play Framework applications, while app5 is Zio HTTP
+* All apps use OpenTelemetry for monitoring.
+* OpenTelemetry agent sends tracing and metrics to OTEL.
+* Prometheus:
+  * http://localhost:9093
+  * http://localhost:9094
+  * http://localhost:9095
+* jaeger: http://localhost:16686
 
-![image](https://user-images.githubusercontent.com/72261652/233178921-9a1bc156-f133-4702-9698-14b8453354cd.png)
 ```
-docker/opentelemetry/docker compose up
+cd docker/opentelemetry && docker compose up
 ```
-Getting trace_id: app3 -> (app4 || app5)
+#### Getting trace_id: app3 -> (app4 || app5)
+In the example, the user sends a request to app3 and the same trace id is sent and distributed to app4 and app5 in parallel.
 ```
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
 curl -i  --header "context-id: error" localhost:9003/api/v1/trace
 ```
 
-#### Prometheus:
+<img width="300" src="https://user-images.githubusercontent.com/72261652/233178921-9a1bc156-f133-4702-9698-14b8453354cd.png" />
 
-http://localhost:9093
-
-http://localhost:9094
-
-http://localhost:9095
-
-#### jaegertracing
-http://localhost:16686
-
-#### Performance tests:
+---
+#### Gatling to build many transactions to display:
 ```
 sbt -Dusers=1 -Dramp=1 -Dport=9000 Gatling/test [For kamon example]
 sbt -Dusers=1 -Dramp=1 -Dport=9003 Gatling/test [For opentelemetry example]
