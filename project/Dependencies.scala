@@ -39,11 +39,12 @@ object Dependencies {
     )
   }
 
+  lazy val JavaInstrumentVersion = "1.32.0"
   lazy val openTelemetryDependencies = {
     val version = "1.38.0"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
-      "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % "2.4.0-alpha" % "runtime"
+      "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
     )
   }
 
@@ -59,5 +60,5 @@ object Dependencies {
   lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.18"
 
   lazy val openTelemetryAgent: ModuleID =
-    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % "2.4.0"
+    "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % JavaInstrumentVersion
 }
