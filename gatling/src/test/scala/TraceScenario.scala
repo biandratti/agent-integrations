@@ -25,7 +25,7 @@ class TraceScenario extends Simulation {
         .header("context-id", contextId)
         .check(status is 200)
         .transformResponse { (response, _) =>
-         // logger.info(response.body.string)
+          // logger.info(response.body.string)
           response
         }
         .requestTimeout(1 minute)
