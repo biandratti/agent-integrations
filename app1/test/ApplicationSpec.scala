@@ -1,6 +1,7 @@
-import org.scalatestplus.play.{BaseOneAppPerTest, PlaySpec}
-import play.api.test.*
-import play.api.test.Helpers.*
+import org.scalatestplus.play.BaseOneAppPerTest
+import org.scalatestplus.play.PlaySpec
+import play.api.test.Helpers._
+import play.api.test._
 
 /** */
 class ApplicationSpec

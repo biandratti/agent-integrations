@@ -1,7 +1,8 @@
-import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
-import org.scalatestplus.play.*
+import org.scalatest.concurrent.IntegrationPatience
+import org.scalatest.concurrent.ScalaFutures
+import org.scalatestplus.play._
 import play.api.mvc.Results
-import play.api.test.Helpers.*
+import play.api.test.Helpers._
 import play.api.test.WsTestClient
 
 class ServerSpec
