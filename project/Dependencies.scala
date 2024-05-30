@@ -31,7 +31,7 @@ object Dependencies {
   }
 
   lazy val kamonDependencies: Seq[ModuleID] = {
-    val kamonVersion = "2.7.1"
+    val kamonVersion = "2.7.2"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
       "io.kamon" %% "kamon-prometheus" % kamonVersion,
@@ -50,7 +50,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.11.2"
+    val version = "3.11.3"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
