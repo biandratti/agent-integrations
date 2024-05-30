@@ -15,7 +15,7 @@ lazy val commonSettings = Seq(
   organization := "biandratti",
   scalaVersion := "3.3.3",
   scalacOptions += "-Xsource:3",
-  //ThisBuild / scapegoatVersion := "2.1.6",
+  // ThisBuild / scapegoatVersion := "2.1.6",
   // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
   // wartremoverExcluded ++= (Compile / routes).value,
   coverageFailOnMinimum := true,
@@ -23,8 +23,9 @@ lazy val commonSettings = Seq(
   semanticdbVersion := scalafixSemanticdb.revision,
   scalafixOnCompile := true,
   scalacOptions ++= Seq(
-    //s"-Wconf:src=${target.value}/.*:s",
-  //  "-Wunused"
+    "-Ywarn-unused"
+    // s"-Wconf:src=${target.value}/.*:s",
+    //  "-Wunused"
     // "-Xfatal-warnings"
   )
 )
