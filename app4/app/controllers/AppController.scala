@@ -1,20 +1,22 @@
 package controllers
 
-import io.opentelemetry.api.trace.{Span, StatusCode}
-import models.TraceResponse
-import play.api.{Logging, MarkerContext}
-import play.api.libs.json.Json
-import play.api.mvc.{
-  AbstractController,
-  Action,
-  AnyContent,
-  ControllerComponents,
-  Headers
-}
-import play.twirl.api.Html
-import utils.RequestMarkerContext.{getCtxId, requestHeaderToMarkerContext}
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
 
-import scala.concurrent.{ExecutionContext, Future}
+import io.opentelemetry.api.trace.Span
+import io.opentelemetry.api.trace.StatusCode
+import models.TraceResponse
+import play.api.Logging
+import play.api.MarkerContext
+import play.api.libs.json.Json
+import play.api.mvc.AbstractController
+import play.api.mvc.Action
+import play.api.mvc.AnyContent
+import play.api.mvc.ControllerComponents
+import play.api.mvc.Headers
+import play.twirl.api.Html
+import utils.RequestMarkerContext.getCtxId
+import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
 class AppController(
     cc: ControllerComponents

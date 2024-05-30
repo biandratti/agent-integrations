@@ -1,10 +1,13 @@
 package services
 
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+
 import models.TraceResponse
+import play.api.Logging
+import play.api.MarkerContext
 import play.api.libs.ws.WSClient
-import play.api.{Logging, MarkerContext}
 import utils.ContextId
-import scala.concurrent.{ExecutionContext, Future}
 
 class TraceService(ws: WSClient) extends Logging {
 

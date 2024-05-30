@@ -1,18 +1,18 @@
 package controllers
 
+import scala.concurrent.ExecutionContext
+
+import play.api.Logging
+import play.api.MarkerContext
 import play.api.libs.json.Json
-import play.api.mvc.{
-  AbstractController,
-  Action,
-  AnyContent,
-  ControllerComponents
-}
-import play.api.{Logging, MarkerContext}
+import play.api.mvc.AbstractController
+import play.api.mvc.Action
+import play.api.mvc.AnyContent
+import play.api.mvc.ControllerComponents
 import play.twirl.api.Html
 import service.TraceService
-import utils.RequestMarkerContext.{getCtxId, requestHeaderToMarkerContext}
-
-import scala.concurrent.ExecutionContext
+import utils.RequestMarkerContext.getCtxId
+import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
 class AppController(
     traceService: TraceService,

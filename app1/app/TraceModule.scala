@@ -1,8 +1,9 @@
+import scala.concurrent.ExecutionContext
+
 import controllers.AppController
 import play.api.libs.ws.WSClient
 import play.api.mvc.ControllerComponents
 import services.TraceService
-import scala.concurrent.ExecutionContext
 
 trait TraceModule {
 

@@ -2,7 +2,7 @@ package utils
 
 import io.opentelemetry.api.trace.Span
 import zhttp.http.Request
-import zio.*
+import zio._
 
 object LogAspect {
 

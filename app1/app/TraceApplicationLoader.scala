@@ -1,7 +1,7 @@
-import com.softwaremill.macwire.*
+import com.softwaremill.macwire._
 import kamon.Kamon
-import play.api.*
 import play.api.ApplicationLoader.Context
+import play.api._
 import play.api.libs.ws.WSClient
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.routing.Router

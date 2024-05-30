@@ -1,7 +1,7 @@
+import scala.concurrent.ExecutionContext
+
 import controllers.AppController
 import play.api.mvc.ControllerComponents
-
-import scala.concurrent.ExecutionContext
 
 trait TraceModule {
 
