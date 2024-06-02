@@ -1,3 +1,2 @@
-
 GET        /                             controllers.AppController.index
 GET        /api/v1/trace                 controllers.AppController.trace()

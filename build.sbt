@@ -14,7 +14,6 @@ lazy val dockerBaseImageName = "adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine"
 lazy val commonSettings = Seq(
   organization := "biandratti",
   scalaVersion := "3.4.0",
-  scalacOptions += "-Xsource:3",
   // ThisBuild / scapegoatVersion := "2.1.6",
   // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
   // wartremoverExcluded ++= (Compile / routes).value,
@@ -23,10 +22,9 @@ lazy val commonSettings = Seq(
   semanticdbVersion := scalafixSemanticdb.revision,
   scalafixOnCompile := true,
   scalacOptions ++= Seq(
-    "-Ywarn-unused"
-    // s"-Wconf:src=${target.value}/.*:s",
-    //  "-Wunused"
-    // "-Xfatal-warnings"
+    "-Yshow-suppressed-errors",
+    "-Wunused:all",
+    s"-Wconf:src=${target.value}/.*:s"
   )
 )
 
