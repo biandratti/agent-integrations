@@ -152,6 +152,28 @@ lazy val app5 = project
     dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
   )
 
+lazy val app6 = project
+  .in(file("app6"))
+  .enablePlugins(
+    AshScriptPlugin,
+    JavaAppPackaging,
+    DockerPlugin,
+    JavaAgent
+  )
+  .settings(commonSettings)
+  .settings(
+    name := "app6",
+    libraryDependencies ++= Dependencies.catsEffectDependencies
+      ++ Dependencies.openTelemetryDependencies,
+    javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
+    javaAgents += Dependencies.openTelemetryAgent,
+    dockerExposedPorts := Seq(9006),
+    dockerBaseImage := dockerBaseImageName,
+    dockerUpdateLatest := true,
+    dockerChmodType := DockerChmodType.UserGroupWriteExecute,
+    dockerPermissionStrategy := DockerPermissionStrategy.CopyChown
+  )
+
 lazy val gatling = project
   .in(file("gatling"))
   .enablePlugins(GatlingPlugin)
