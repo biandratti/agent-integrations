@@ -164,7 +164,7 @@ lazy val app6 = project
   .settings(
     name := "app6",
     libraryDependencies ++= Dependencies.catsEffectDependencies
-      ++ Dependencies.openTelemetryDependencies,
+      ++ Dependencies.otel4sDependencies,
     javaOptions += "-Dotel.javaagent.debug=true", // Debug OpenTelemetry Java agent
     javaAgents += Dependencies.openTelemetryAgent,
     dockerExposedPorts := Seq(9006),

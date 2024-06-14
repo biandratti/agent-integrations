@@ -49,14 +49,21 @@ object Dependencies {
   }
 
   lazy val JavaInstrumentVersion = "2.4.0"
+  lazy val OpenTelemetryVersion = "1.39.0"
 
-  lazy val openTelemetryDependencies = {
-    val version = "1.39.0"
+  lazy val openTelemetryDependencies: Seq[ModuleID] = {
     Seq(
-      "io.opentelemetry" % "opentelemetry-api" % version,
+      "io.opentelemetry" % "opentelemetry-api" % OpenTelemetryVersion,
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
     )
   }
+
+  lazy val otel4sDependencies : Seq[ModuleID] = Seq(
+    "org.typelevel" %% "otel4s-oteljava" % "0.8.0",
+    "io.opentelemetry" % "opentelemetry-exporter-otlp" % OpenTelemetryVersion % Runtime,
+    "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
+    //"io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % "1.38.0" % Runtime
+  )
 
   lazy val gatling = {
     val version = "3.11.3"
