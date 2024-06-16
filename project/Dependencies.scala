@@ -28,7 +28,7 @@ object Dependencies {
     Seq(
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
-      "org.http4s" %% "http4s-dsl" % http4sVersion,
+      "org.http4s" %% "http4s-dsl" % http4sVersion
     )
   }
 
@@ -58,11 +58,11 @@ object Dependencies {
     )
   }
 
-  lazy val otel4sDependencies : Seq[ModuleID] = Seq(
+  lazy val otel4sDependencies: Seq[ModuleID] = Seq(
     "org.typelevel" %% "otel4s-oteljava" % "0.8.0",
     "io.opentelemetry" % "opentelemetry-exporter-otlp" % OpenTelemetryVersion % Runtime,
     "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
-    //"io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % "1.38.0" % Runtime
+    // "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % OpenTelemetryVersion % Runtime
   )
 
   lazy val gatling = {
