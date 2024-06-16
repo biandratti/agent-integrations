@@ -31,7 +31,7 @@ object Dependencies {
   }
 
   lazy val kamonDependencies: Seq[ModuleID] = {
-    val kamonVersion = "2.7.2"
+    val kamonVersion = "2.7.3"
     Seq(
       "io.kamon" %% "kamon-bundle" % kamonVersion,
       "io.kamon" %% "kamon-prometheus" % kamonVersion,
@@ -42,7 +42,7 @@ object Dependencies {
   lazy val JavaInstrumentVersion = "2.4.0"
 
   lazy val openTelemetryDependencies = {
-    val version = "1.38.0"
+    val version = "1.39.0"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
