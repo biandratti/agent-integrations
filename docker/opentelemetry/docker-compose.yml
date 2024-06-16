@@ -31,6 +31,25 @@ services:
     depends_on:
       - jaeger
 
+  app6:
+    image: app6
+    hostname: app6
+    restart: always
+    environment:
+      - OTEL_SERVICE_NAME=app6
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9096
+      - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
+    networks:
+      - tracenet
+    ports:
+      - "9006:9006"
+      - "9096:9096"
+    depends_on:
+      - otel-collector
+
   app5:
     image: app5
     hostname: app5
@@ -78,13 +97,13 @@ services:
       - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_METRICS_EXPORTER=prometheus
-      - OTEL_EXPORTER_PROMETHEUS_PORT=9094
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9093
       - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
     networks:
       - tracenet
     ports:
       - "9003:9003"
-      - "9093:9094"
+      - "9093:9093"
     depends_on:
       - app4
       - app5
