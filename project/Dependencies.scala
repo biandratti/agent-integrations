@@ -30,7 +30,8 @@ object Dependencies {
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-circe" % http4sVersion,
-      "io.circe" %% "circe-generic" % "0.14.7"
+      "io.circe" %% "circe-generic" % "0.14.7",
+      "ch.qos.logback" % "logback-classic" % "1.5.6"
     )
   }
 
