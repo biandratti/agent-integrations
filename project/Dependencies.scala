@@ -39,7 +39,7 @@ object Dependencies {
     )
   }
 
-  lazy val JavaInstrumentVersion = "2.4.0"
+  lazy val JavaInstrumentVersion = "2.5.0"
 
   lazy val openTelemetryDependencies = {
     val version = "1.39.0"
@@ -50,7 +50,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.11.3"
+    val version = "3.11.4"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
