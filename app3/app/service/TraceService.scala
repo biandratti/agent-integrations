@@ -8,7 +8,8 @@ import utils.ContextId
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class TraceService @Inject() (ws: WSClient, config: Configuration) extends Logging {
+class TraceService @Inject() (ws: WSClient, config: Configuration)
+    extends Logging {
 
   private lazy val api4URL = config.get[String]("app4.url")
   private lazy val api5URL = config.get[String]("app5.url")
