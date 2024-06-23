@@ -36,6 +36,8 @@ services:
     depends_on:
       - app2
       - jaeger
+    environment:
+      - APP2_URL=http://app2:9002/api/v1/trace
 
 networks:
   tracenet:
