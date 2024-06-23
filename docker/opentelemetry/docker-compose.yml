@@ -80,6 +80,8 @@ services:
       - OTEL_METRICS_EXPORTER=prometheus
       - OTEL_EXPORTER_PROMETHEUS_PORT=9094
       - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
+      - APP4_URL=http://app4:9004/api/v1/trace
+      - APP5_URL=http://app5:9005/api/v1/trace
     networks:
       - tracenet
     ports:
