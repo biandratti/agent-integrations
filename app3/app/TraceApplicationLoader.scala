@@ -36,4 +36,5 @@ class TraceComponents(context: Context)
   }
 
   override def ws: WSClient = wsClient
+  override def configuration: Configuration = context.initialConfiguration
 }
