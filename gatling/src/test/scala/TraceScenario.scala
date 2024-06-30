@@ -9,7 +9,7 @@ import io.gatling.http.Predef._
 
 class TraceScenario extends Simulation {
 
-  private val logger = com.typesafe.scalalogging.Logger(getClass)
+  // private val logger = com.typesafe.scalalogging.Logger(getClass)
 
   val port = java.lang.Long.getLong("port", 9003)
   val httpProtocol = http.baseUrl(s"http://localhost:$port")

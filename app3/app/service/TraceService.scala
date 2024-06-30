@@ -18,7 +18,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
   private lazy val api4URL = config.get[String]("app4.url")
   private lazy val api5URL = config.get[String]("app5.url")
 
-  def getTrace(ctxId: String)(using 
+  def getTrace(ctxId: String)(using
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
@@ -28,7 +28,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
     } yield result
   }
 
-  private def getTrace(ctxId: String, url: String)(using 
+  private def getTrace(ctxId: String, url: String)(using
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
