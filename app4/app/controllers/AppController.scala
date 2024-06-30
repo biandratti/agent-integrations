@@ -20,12 +20,12 @@ import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
 class AppController(
     cc: ControllerComponents
-)(implicit ec: ExecutionContext)
+)(using ec: ExecutionContext)
     extends AbstractController(cc)
     with Logging {
 
-  def trace: Action[AnyContent] = Action.async { implicit request =>
-    implicit val mc: MarkerContext =
+  def trace: Action[AnyContent] = Action.async { request =>
+    given mc: MarkerContext =
       requestHeaderToMarkerContext(request.headers)
     logger.info("trace request")
     Future(

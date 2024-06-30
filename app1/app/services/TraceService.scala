@@ -17,12 +17,17 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
 
   private lazy val app2URL = config.get[String]("app2.url")
 
-  def getTrace(ctxId: String)(implicit
+  def getTrace(ctxId: String)(using
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
+    logger.info(s"request to app2")
     ws.url(app2URL)
-      .withHttpHeaders(headers = (ContextId.cId, ctxId))
+      .withHttpHeaders(
+        headers = (ContextId.cId, ctxId)
+//        ("X-B3-TraceId", Kamon.currentSpan().trace.id.string),
+//        ("X-B3-ParentSpanId", Kamon.currentSpan().id.string)
+      )
       .get()
       .map(response => {
         logger.info(s"app2 response: ${response.body}")

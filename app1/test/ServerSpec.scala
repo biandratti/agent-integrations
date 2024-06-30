@@ -15,7 +15,7 @@ class ServerSpec
 
   "Server query should" should {
     "work" in {
-      WsTestClient.withClient { implicit client =>
+      WsTestClient.withClient { client =>
         whenReady(wsUrl("/").get()) { response =>
           response.status mustBe OK
         }

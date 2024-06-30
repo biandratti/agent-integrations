@@ -6,7 +6,7 @@ package object models {
   case class TraceResponse(id: String)
 
   object TraceResponse {
-    implicit val TraceResponseFormat: OFormat[TraceResponse] =
+    given TraceResponseFormat: OFormat[TraceResponse] =
       Json.format[TraceResponse]
   }
 

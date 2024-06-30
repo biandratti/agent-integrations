@@ -13,7 +13,7 @@ trait TraceModule {
   lazy val traceService = wire[TraceService]
   lazy val traceController = wire[AppController]
 
-  implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
+  given ec: ExecutionContext = scala.concurrent.ExecutionContext.global
   def ws: WSClient
   def controllerComponents: ControllerComponents
   def configuration: Configuration

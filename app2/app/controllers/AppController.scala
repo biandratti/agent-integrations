@@ -17,15 +17,15 @@ import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
 class AppController(
     cc: ControllerComponents
-)(implicit ec: ExecutionContext)
+)(using ec: ExecutionContext)
     extends AbstractController(cc)
     with Logging {
 
   def trace(): Action[AnyContent] =
-    Action.async { implicit request =>
-      implicit val mc: MarkerContext =
+    Action.async { request =>
+      given mc: MarkerContext =
         requestHeaderToMarkerContext(request.headers)
-      logger.info("trace request")
+      logger.info(s"trace request with headers: ${request.headers}")
       Future(
         Ok(Json.toJson(TraceResponse(Kamon.currentSpan().trace.id.string)))
       )

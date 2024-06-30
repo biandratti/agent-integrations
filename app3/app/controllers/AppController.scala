@@ -17,13 +17,13 @@ import utils.RequestMarkerContext.requestHeaderToMarkerContext
 class AppController(
     traceService: TraceService,
     cc: ControllerComponents
-)(implicit ec: ExecutionContext)
+)(using ec: ExecutionContext)
     extends AbstractController(cc)
     with Logging {
 
   def trace: Action[AnyContent] =
-    Action.async { implicit request =>
-      implicit val mc: MarkerContext =
+    Action.async { request =>
+      given mc: MarkerContext =
         requestHeaderToMarkerContext(request.headers)
       traceService
         .getTrace(getCtxId(request.headers))
