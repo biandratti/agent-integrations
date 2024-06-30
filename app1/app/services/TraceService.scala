@@ -1,5 +1,7 @@
 package services
 
+import javax.inject.Inject
+
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
@@ -9,7 +11,6 @@ import play.api.Logging
 import play.api.MarkerContext
 import play.api.libs.ws.WSClient
 import utils.ContextId
-import javax.inject.Inject
 
 class TraceService @Inject() (ws: WSClient, config: Configuration)
     extends Logging {
