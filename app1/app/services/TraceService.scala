@@ -17,11 +17,14 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
+    logger.info(s"app1 request to app1")
     ws.url(app2URL)
       .withHttpHeaders(headers = (ContextId.cId, ctxId))
       .get()
       .map(response => {
-        logger.info(s"app2 response: ${response.body}")
+        logger.info(
+          s"app2 response: ${response.body} - headers: ${response.headers}"
+        )
         response.json.as[TraceResponse]
       })
       .recover { case ex: Exception =>
