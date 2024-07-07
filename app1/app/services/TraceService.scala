@@ -2,13 +2,16 @@ package services
 
 import models.TraceResponse
 import play.api.libs.ws.WSClient
-import play.api.{Logging, MarkerContext}
+import play.api.{Configuration, Logging, MarkerContext}
 import utils.ContextId
+
+import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class TraceService(ws: WSClient) extends Logging {
+class TraceService @Inject() (ws: WSClient, config: Configuration)
+    extends Logging {
 
-  private lazy val app2URL = "http://app2:9002/api/v1/trace"
+  private lazy val app2URL = config.get[String]("app2.url")
 
   def getTrace(ctxId: String)(implicit
       mc: MarkerContext,
