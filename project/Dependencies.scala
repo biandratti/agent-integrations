@@ -25,7 +25,7 @@ object Dependencies {
 
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.1",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.2",
       "net.logstash.logback" % "logstash-logback-encoder" % "7.4"
     )
   }
@@ -42,7 +42,7 @@ object Dependencies {
   lazy val JavaInstrumentVersion = "2.5.0"
 
   lazy val openTelemetryDependencies = {
-    val version = "1.38.0"
+    val version = "1.40.0"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
@@ -50,7 +50,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.11.4"
+    val version = "3.11.5"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
