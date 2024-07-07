@@ -19,7 +19,7 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.12")
 addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
 
 //gatling
-addSbtPlugin("io.gatling" % "gatling-sbt" % "4.9.0")
+addSbtPlugin("io.gatling" % "gatling-sbt" % "4.9.2")
 
 //https://github.com/scala/bug/issues/12632
 ThisBuild / libraryDependencySchemes ++= Seq(
