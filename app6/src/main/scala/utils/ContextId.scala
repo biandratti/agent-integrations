@@ -8,7 +8,9 @@ import utils.ContextId.cId
 import java.util.UUID
 
 object ContextId {
-  lazy val cId = CIString("context-id") // TODO: choose correlation-id in all the solution
+  lazy val cId = CIString(
+    "context-id"
+  ) // TODO: choose correlation-id in all the solution
 }
 
 trait ContextId {
@@ -16,7 +18,8 @@ trait ContextId {
   private[this] val logger = getLogger
   def getCtxId(requestHeader: Headers): String = {
     requestHeader
-      .get(cId).map(_.head.value)
+      .get(cId)
+      .map(_.head.value)
       .getOrElse({
         logger.warn(s"$cId is missing")
         UUID.randomUUID().toString

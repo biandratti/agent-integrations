@@ -30,8 +30,10 @@ class AppController[F[_]: Async](tracer: Tracer[F])
 
   def trace: HttpRoutes[F] = HttpRoutes.of[F] {
     case request @ GET -> Root / "api" / "v1" / "trace" =>
-      logger.info("trace request...")
-      Ok(TraceResponse(getSpan(request.headers).getSpanContext.getTraceId).asJson)
+      logger.info(s"trace request - headers ${request.headers.headers}")
+      Ok(
+        TraceResponse(getSpan(request.headers).getSpanContext.getTraceId).asJson
+      )
   }
 
   private def getSpan(requestHeader: Headers): Span = {
