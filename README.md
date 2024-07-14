@@ -34,13 +34,14 @@ curl -i  --header "context-id: mycontextid" localhost:9001/api/v1/trace
 ---
 ### Example 2: OpenTelemetry agent
 
-* app3 and app4 are Play Framework applications, while app5 is Zio HTTP
+* app3 and app4 are Play Framework applications, while app5 is Zio HTTP, and app6 is Http4s
 * All apps use OpenTelemetry for monitoring.
 * OpenTelemetry agent sends tracing and metrics to OTEL.
 * Prometheus:
   * http://localhost:9093
   * http://localhost:9094
   * http://localhost:9095
+  * http://localhost:9096
 * jaeger: http://localhost:16686
 
 ```

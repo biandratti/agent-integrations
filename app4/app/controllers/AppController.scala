@@ -25,7 +25,7 @@ class AppController(
   def trace: Action[AnyContent] = Action.async { implicit request =>
     implicit val mc: MarkerContext =
       requestHeaderToMarkerContext(request.headers)
-    logger.info("trace request")
+    logger.info(s"trace request - headers ${request.headers.headers}")
     Future(
       Ok(
         Json.toJson(
