@@ -21,7 +21,24 @@ trait ServerMiddleware {
           .withSpanKind(SpanKind.Server)
           .build
           .use { span =>
+            val spanCorrelationIdHeader =
+              Header.Raw(CIString("span_id"), span.context.spanIdHex)
+            val traceIdHeader =
+              Header.Raw(CIString("trace_id"), span.context.traceIdHex)
+            req.putHeaders(spanCorrelationIdHeader)
+            req.putHeaders(traceIdHeader)
+            val contextId = req.headers
+              .get(CIString("context-id"))
+              .map(_.head.value)
+              .getOrElse("missing context") // TODO:WIP...
             for {
+              _ <- span.addAttribute(
+                Attribute("span_id", span.context.spanIdHex)
+              )
+              _ <- span.addAttribute(
+                Attribute("trace_id", span.context.traceIdHex)
+              )
+              _ <- span.addAttribute(Attribute("context-id", contextId))
               response <- service(req)
               _ <- span.addAttribute(
                 Attribute("http.status-code", response.status.code.toLong)
@@ -30,18 +47,7 @@ trait ServerMiddleware {
                 if (response.status.isSuccess) span.setStatus(StatusCode.Ok)
                 else span.setStatus(StatusCode.Error)
               }
-              contextId = req.headers
-                .get(CIString("context-id"))
-                .map(_.head.value)
-                .getOrElse("missing context") // TODO:WIP...
-              _ <- span.addAttribute(Attribute("context-id", contextId))
             } yield {
-              val spanCorrelationIdHeader =
-                Header.Raw(CIString("span_id"), span.context.spanIdHex)
-              val traceIdHeader =
-                Header.Raw(CIString("trace_id"), span.context.traceIdHex)
-              req.putHeaders(spanCorrelationIdHeader)
-              req.putHeaders(traceIdHeader)
               response.putHeaders(spanCorrelationIdHeader)
               response.putHeaders(traceIdHeader)
             }
