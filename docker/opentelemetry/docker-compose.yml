@@ -20,7 +20,6 @@ services:
     command: ["--config=/otel-collector-config.yml"]
     volumes:
       - ./otel-collector-config.yml:/otel-collector-config.yml
-
     ports:
       - "1888:1888"   # pprof extension
       - "8888:8888"   # Prometheus metrics exposed by the collector
@@ -30,6 +29,11 @@ services:
       - "4317:4317"   # grpc exposed by trace
     depends_on:
       - jaeger
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:13133"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   app6:
     image: app6
