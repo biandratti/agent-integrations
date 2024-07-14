@@ -21,8 +21,8 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
   ): Future[TraceResponse] = {
     for {
       _ <- getTrace(ctxId, api4URL)
-      _ <- getTrace(ctxId, api6URL)
-      result <- getTrace(ctxId, api5URL)
+      _ <- getTrace(ctxId, api5URL)
+      result <- getTrace(ctxId, api6URL)
     } yield result
   }
 

@@ -30,9 +30,12 @@ trait ServerMiddleware {
                 if (response.status.isSuccess) span.setStatus(StatusCode.Ok)
                 else span.setStatus(StatusCode.Error)
               }
+              //contextId = req.headers.get(CIString("context-id")).toString //TODO....
+              _ <- span.addAttribute(Attribute("context-id" , "mycontextid"))
             } yield {
-              val traceIdHeader =
-                Header.Raw(CIString("traceId"), span.context.traceIdHex)
+              val spanCorrelationIdHeader = Header.Raw(CIString("span_id"), span.context.spanIdHex)
+              val traceIdHeader = Header.Raw(CIString("trace_id"), span.context.traceIdHex)
+              response.putHeaders(spanCorrelationIdHeader)
               response.putHeaders(traceIdHeader)
             }
           }
