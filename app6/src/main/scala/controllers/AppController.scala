@@ -32,6 +32,7 @@ class AppController[F[_]: Async](tracer: Tracer[F])
   implicit val t: Tracer[F] = tracer
   private[this] val logger = getLogger
 
+  // TODO:WIP..
   private val propagator = W3CTraceContextPropagator.getInstance()
   private val getter = new TextMapGetter[Headers] {
     override def keys(carrier: Headers): java.lang.Iterable[String] =
