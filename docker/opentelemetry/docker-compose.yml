@@ -101,6 +101,7 @@ services:
       - OTEL_EXPORTER_PROMETHEUS_HOST=0.0.0.0
       - APP4_URL=http://app4:9004/api/v1/trace
       - APP5_URL=http://app5:9005/api/v1/trace
+      - APP6_URL=http://app6:9006/api/v1/trace
     networks:
       - tracenet
     ports:
@@ -109,6 +110,7 @@ services:
     depends_on:
       - app4
       - app5
+      - app6
       - otel-collector
 
 networks:

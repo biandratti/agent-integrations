@@ -13,6 +13,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
 
   private lazy val api4URL = config.get[String]("app4.url")
   private lazy val api5URL = config.get[String]("app5.url")
+  private lazy val api6URL = config.get[String]("app6.url")
 
   def getTrace(ctxId: String)(implicit
       mc: MarkerContext,
@@ -20,6 +21,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
   ): Future[TraceResponse] = {
     for {
       _ <- getTrace(ctxId, api4URL)
+      _ <- getTrace(ctxId, api6URL)
       result <- getTrace(ctxId, api5URL)
     } yield result
   }

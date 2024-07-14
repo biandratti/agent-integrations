@@ -15,7 +15,7 @@ import org.typelevel.otel4s.trace.Tracer
 import utils.ContextId
 import utils.ServerMiddleware.*
 
-case class TraceResponse(traceId: String)
+case class TraceResponse(id: String)
 
 object TraceResponse {
   implicit def traceResponseEncoder[F[_]]: EntityEncoder[F, TraceResponse] =
