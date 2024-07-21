@@ -3,7 +3,7 @@ package utils
 import cats.data.Kleisli
 import cats.effect.{Async, Sync}
 import cats.implicits.*
-import org.http4s.{Header, HttpApp, Request}
+import org.http4s.{Header, Headers, HttpApp, Request}
 import org.typelevel.ci.CIString
 import org.typelevel.otel4s.Attribute
 import org.typelevel.otel4s.trace.{SpanKind, StatusCode, Tracer}
@@ -25,12 +25,17 @@ trait ServerMiddleware {
               Header.Raw(CIString("span_id"), span.context.spanIdHex)
             val traceIdHeader =
               Header.Raw(CIString("trace_id"), span.context.traceIdHex)
-            req.putHeaders(spanCorrelationIdHeader)
-            req.putHeaders(traceIdHeader)
+
+            // Add trace headers to the request
+            val newReq = req.withHeaders(
+              req.headers.put(spanCorrelationIdHeader, traceIdHeader)
+            )
+
             val contextId = req.headers
               .get(CIString("context-id"))
               .map(_.head.value)
-              .getOrElse("missing context") // TODO:WIP...
+              .getOrElse("missing context")
+
             for {
               _ <- span.addAttribute(
                 Attribute("span_id", span.context.spanIdHex)
@@ -39,7 +44,7 @@ trait ServerMiddleware {
                 Attribute("trace_id", span.context.traceIdHex)
               )
               _ <- span.addAttribute(Attribute("context-id", contextId))
-              response <- service(req)
+              response <- service(newReq)
               _ <- span.addAttribute(
                 Attribute("http.status-code", response.status.code.toLong)
               )
@@ -48,8 +53,8 @@ trait ServerMiddleware {
                 else span.setStatus(StatusCode.Error)
               }
             } yield {
-              response.putHeaders(spanCorrelationIdHeader)
-              response.putHeaders(traceIdHeader)
+              // Add trace headers to the response
+              response.putHeaders(spanCorrelationIdHeader, traceIdHeader)
             }
           }
       }

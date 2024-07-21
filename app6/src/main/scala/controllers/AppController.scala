@@ -12,12 +12,18 @@ import org.http4s.*
 import org.http4s.circe.*
 import org.http4s.dsl.Http4sDsl
 import org.http4s.implicits.*
-import org.log4s.getLogger
 import org.typelevel.ci.CIString
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.otel4s.trace.Tracer
-import utils.ContextId
 import utils.ServerMiddleware.*
-import scala.jdk.CollectionConverters._
+import utils.{
+  ContextId,
+  ContextualLogger,
+  HttpRequestContextual,
+  RequestContext
+}
+
+import scala.jdk.CollectionConverters.*
 
 case class TraceResponse(id: String)
 
@@ -30,7 +36,9 @@ class AppController[F[_]: Async](tracer: Tracer[F])
     extends Http4sDsl[F]
     with ContextId {
   implicit val t: Tracer[F] = tracer
-  private[this] val logger = getLogger
+
+  val logger: ContextualLogger[F] =
+    new ContextualLogger[F](Slf4jLogger.getLogger[F])
 
   // TODO:WIP..
   private val propagator = W3CTraceContextPropagator.getInstance()
@@ -44,25 +52,22 @@ class AppController[F[_]: Async](tracer: Tracer[F])
 
   def trace: HttpRoutes[F] = HttpRoutes.of[F] {
     case request @ GET -> Root / "api" / "v1" / "trace" =>
-      val context =
-        propagator.extract(Context.current(), request.headers, getter)
-      val span = Span.fromContext(context)
-      logger.info(s"trace request - headers ${request.headers.headers}")
-      logger.info(s"trace_id ${span.getSpanContext.getTraceId}")
-      Ok(
-        TraceResponse(span.getSpanContext.getTraceId).asJson
-      )
+      HttpRequestContextual.contextual(request) {
+        implicit ctx: RequestContext =>
+          val context =
+            propagator.extract(Context.current(), request.headers, getter)
+          val span = Span.fromContext(context)
+          for {
+            _ <- logger.info(
+              s"trace request - headers ${request.headers.headers}"
+            )
+            _ <- logger.info(s"trace_id ${span.getSpanContext.getTraceId}")
+            response <- Ok(
+              TraceResponse(span.getSpanContext.getTraceId).asJson
+            )
+          } yield response
+      }
   }
-
-  /*private def getSpan(requestHeader: Headers): Span = {
-    val span = Span.current()
-    if (getCtxId(requestHeader).equalsIgnoreCase("error")) {
-      logger.error("simulating an unexpected error")
-      span.setStatus(StatusCode.ERROR, "Unexpected error")
-      // span.end()
-    }
-    span
-  }*/
 
   def index: HttpRoutes[F] = HttpRoutes.of[F] { case GET -> Root / "health" =>
     Ok(
