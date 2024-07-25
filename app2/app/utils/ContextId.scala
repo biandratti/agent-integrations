@@ -1,10 +1,10 @@
 package utils
 
+import java.util.UUID
+
 import play.api.Logging
 import play.api.mvc.Headers
 import utils.ContextId.cId
-
-import java.util.UUID
 
 object ContextId {
   lazy val cId = "context-id"

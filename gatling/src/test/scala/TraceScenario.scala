@@ -1,13 +1,15 @@
-import io.gatling.core.Predef.*
-import io.gatling.core.scenario.Simulation
-import io.gatling.http.Predef.*
-import java.util.UUID;
-import scala.concurrent.duration.*
+import java.util.UUID
+
+import scala.concurrent.duration._
 import scala.language.postfixOps
+
+import io.gatling.core.Predef._
+import io.gatling.core.scenario.Simulation
+import io.gatling.http.Predef._
 
 class TraceScenario extends Simulation {
 
-  private val logger = com.typesafe.scalalogging.Logger(getClass)
+  // private val logger = com.typesafe.scalalogging.Logger(getClass)
 
   val port = java.lang.Long.getLong("port", 9003)
   val httpProtocol = http.baseUrl(s"http://localhost:$port")
@@ -23,7 +25,7 @@ class TraceScenario extends Simulation {
         .header("context-id", contextId)
         .check(status is 200)
         .transformResponse { (response, _) =>
-          logger.info(response.body.string)
+          // logger.info(response.body.string)
           response
         }
         .requestTimeout(1 minute)
@@ -32,7 +34,7 @@ class TraceScenario extends Simulation {
 
   setUp(
     scenario("Simulate traffic")
-      .exec(execTrace)
+      .exec(execTrace())
       .inject(rampUsers(nbUsers).during(myRamp))
       .protocols(httpProtocol)
   )

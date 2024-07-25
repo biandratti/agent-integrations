@@ -1,31 +1,31 @@
 package controllers
 
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+
 import kamon.Kamon
 import models.TraceResponse
+import play.api.Logging
+import play.api.MarkerContext
 import play.api.libs.json.Json
-import play.api.mvc.{
-  AbstractController,
-  Action,
-  AnyContent,
-  ControllerComponents
-}
-import play.api.{Logging, MarkerContext}
+import play.api.mvc.AbstractController
+import play.api.mvc.Action
+import play.api.mvc.AnyContent
+import play.api.mvc.ControllerComponents
 import play.twirl.api.Html
 import utils.RequestMarkerContext.requestHeaderToMarkerContext
 
-import scala.concurrent.{ExecutionContext, Future}
-
 class AppController(
     cc: ControllerComponents
-)(implicit ec: ExecutionContext)
+)(using ec: ExecutionContext)
     extends AbstractController(cc)
     with Logging {
 
   def trace(): Action[AnyContent] =
-    Action.async { implicit request =>
-      implicit val mc: MarkerContext =
+    Action.async { request =>
+      given mc: MarkerContext =
         requestHeaderToMarkerContext(request.headers)
-      logger.info("trace request")
+      logger.info(s"trace request with headers: ${request.headers}")
       Future(
         Ok(Json.toJson(TraceResponse(Kamon.currentSpan().trace.id.string)))
       )
