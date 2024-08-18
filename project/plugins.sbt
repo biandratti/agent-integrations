@@ -1,5 +1,5 @@
 //play framework
-addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.4")
+addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.5")
 
 //Agents (Kanela and Opentelemetry)
 addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
@@ -8,7 +8,7 @@ addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
 
 //lints
-addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.1.7")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.2.0")
 addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.4")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.12.1")
 
