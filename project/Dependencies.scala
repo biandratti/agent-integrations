@@ -39,7 +39,7 @@ object Dependencies {
     )
   }
 
-  lazy val JavaInstrumentVersion = "2.6.0"
+  lazy val JavaInstrumentVersion = "2.7.0"
 
   lazy val openTelemetryDependencies = {
     val version = "1.40.0"
