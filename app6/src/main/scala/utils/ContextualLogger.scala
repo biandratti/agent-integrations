@@ -5,7 +5,9 @@ import org.typelevel.log4cats.Logger
 
 class ContextualLogger[F[_]: Sync](logger: Logger[F]) {
 
-  private def contextual(message: => String)(implicit ctx: RequestContext): String =
+  private def contextual(message: => String)(implicit
+      ctx: RequestContext
+  ): String =
     s"${ctx.requestId} - $message"
 
   def error(message: => String)(implicit ctx: RequestContext): F[Unit] =
@@ -23,19 +25,28 @@ class ContextualLogger[F[_]: Sync](logger: Logger[F]) {
   def trace(message: => String)(implicit ctx: RequestContext): F[Unit] =
     logger.trace(contextual(message))
 
-  def error(t: Throwable)(message: => String)(implicit ctx: RequestContext): F[Unit] =
+  def error(t: Throwable)(message: => String)(implicit
+      ctx: RequestContext
+  ): F[Unit] =
     logger.error(t)(contextual(message))
 
-  def warn(t: Throwable)(message: => String)(implicit ctx: RequestContext): F[Unit] =
+  def warn(t: Throwable)(message: => String)(implicit
+      ctx: RequestContext
+  ): F[Unit] =
     logger.warn(t)(contextual(message))
 
-  def info(t: Throwable)(message: => String)(implicit ctx: RequestContext): F[Unit] =
+  def info(t: Throwable)(message: => String)(implicit
+      ctx: RequestContext
+  ): F[Unit] =
     logger.info(t)(contextual(message))
 
-  def debug(t: Throwable)(message: => String)(implicit ctx: RequestContext): F[Unit] =
+  def debug(t: Throwable)(message: => String)(implicit
+      ctx: RequestContext
+  ): F[Unit] =
     logger.debug(t)(contextual(message))
 
-  def trace(t: Throwable)(message: => String)(implicit ctx: RequestContext): F[Unit] =
+  def trace(t: Throwable)(message: => String)(implicit
+      ctx: RequestContext
+  ): F[Unit] =
     logger.trace(t)(contextual(message))
 }
-
