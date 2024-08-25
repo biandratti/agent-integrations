@@ -23,6 +23,18 @@ object Dependencies {
     )
   }
 
+  lazy val catsEffectDependencies: Seq[ModuleID] = {
+    val http4sVersion = "0.23.16"
+    Seq(
+      "org.http4s" %% "http4s-blaze-server" % http4sVersion,
+      "org.http4s" %% "http4s-blaze-client" % http4sVersion,
+      "org.http4s" %% "http4s-dsl" % http4sVersion,
+      "org.http4s" %% "http4s-circe" % http4sVersion,
+      "io.circe" %% "circe-generic" % "0.14.7",
+      "ch.qos.logback" % "logback-classic" % "1.5.6"
+    )
+  }
+
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.2",
@@ -40,14 +52,21 @@ object Dependencies {
   }
 
   lazy val JavaInstrumentVersion = "2.7.0"
+  lazy val OpenTelemetryVersion = "1.41.0"
 
-  lazy val openTelemetryDependencies = {
-    val version = "1.41.0"
+  lazy val openTelemetryDependencies: Seq[ModuleID] = {
     Seq(
-      "io.opentelemetry" % "opentelemetry-api" % version,
+      "io.opentelemetry" % "opentelemetry-api" % OpenTelemetryVersion,
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
     )
   }
+
+  lazy val otel4sDependencies: Seq[ModuleID] = Seq(
+    "org.typelevel" %% "otel4s-oteljava" % "0.8.0",
+    "io.opentelemetry" % "opentelemetry-exporter-otlp" % OpenTelemetryVersion % Runtime,
+    "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
+    // "io.opentelemetry" % "opentelemetry-sdk-extension-autoconfigure" % OpenTelemetryVersion % Runtime
+  )
 
   lazy val gatling = {
     val version = "3.11.5"
