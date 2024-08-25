@@ -14,7 +14,7 @@ object Dependencies {
       "dev.zio" %% "zio" % "2.1.1",
       "dev.zio" %% "zio-logging" % "2.2.4",
       "dev.zio" %% "zio-logging-slf4j" % "2.2.4",
-      "ch.qos.logback" % "logback-classic" % "1.5.6",
+      "ch.qos.logback" % "logback-classic" % "1.5.7",
       "dev.zio" %% "zio-json" % "0.6.2",
       "io.d11" %% "zhttp" % "2.0.0-RC11",
       "dev.zio" %% "zio-test" % "2.1.1" % Test,
@@ -26,7 +26,7 @@ object Dependencies {
   lazy val logstashDependencies: Seq[ModuleID] = {
     Seq(
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.2",
-      "net.logstash.logback" % "logstash-logback-encoder" % "7.4"
+      "net.logstash.logback" % "logstash-logback-encoder" % "8.0"
     )
   }
 
@@ -39,10 +39,10 @@ object Dependencies {
     )
   }
 
-  lazy val JavaInstrumentVersion = "2.5.0"
+  lazy val JavaInstrumentVersion = "2.7.0"
 
   lazy val openTelemetryDependencies = {
-    val version = "1.40.0"
+    val version = "1.41.0"
     Seq(
       "io.opentelemetry" % "opentelemetry-api" % version,
       "io.opentelemetry.instrumentation" % "opentelemetry-logback-appender-1.0" % s"$JavaInstrumentVersion-alpha" % "runtime"
