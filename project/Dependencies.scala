@@ -50,7 +50,7 @@ object Dependencies {
   }
 
   lazy val gatling = {
-    val version = "3.11.5"
+    val version = "3.12.0"
     Seq(
       "io.gatling" % "gatling-core" % version,
       "io.gatling" % "gatling-test-framework" % version,
