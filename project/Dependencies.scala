@@ -4,7 +4,7 @@ object Dependencies {
 
   lazy val playDependencies: Seq[ModuleID] = {
     Seq(
-      "com.softwaremill.macwire" %% "macros" % "2.5.9" % "provided",
+      "com.softwaremill.macwire" %% "macros" % "2.6.2" % "provided",
       "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
     )
   }
@@ -39,7 +39,7 @@ object Dependencies {
     )
   }
 
-  lazy val JavaInstrumentVersion = "2.8.0"
+  lazy val JavaInstrumentVersion = "2.7.0"
 
   lazy val openTelemetryDependencies = {
     val version = "1.42.1"
