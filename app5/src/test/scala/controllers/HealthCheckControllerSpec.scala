@@ -1,7 +1,7 @@
 package controllers
 
 import zhttp.http._
-import zio.test.*
+import zio.test._
 
 object HealthCheckControllerSpec extends ZIOSpecDefault {
   def spec: Spec[Any, Serializable] =

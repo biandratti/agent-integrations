@@ -1,4 +1,4 @@
-import org.scalatestplus.play.*
+import org.scalatestplus.play._
 
 class SeleniumSpec
     extends PlaySpec

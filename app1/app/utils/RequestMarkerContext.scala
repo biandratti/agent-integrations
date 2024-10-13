@@ -2,7 +2,7 @@ package utils
 
 import kamon.Kamon
 import net.logstash.logback.marker.LogstashMarker
-import net.logstash.logback.marker.Markers.*
+import net.logstash.logback.marker.Markers._
 import play.api.MarkerContext
 import play.api.mvc.Headers
 import utils.ContextId.cId

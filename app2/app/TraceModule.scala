@@ -1,7 +1,7 @@
+import scala.concurrent.ExecutionContext
+
 import controllers.AppController
 import play.api.mvc.ControllerComponents
-
-import scala.concurrent.ExecutionContext
 
 trait TraceModule {
 
@@ -9,6 +9,6 @@ trait TraceModule {
 
   lazy val traceController = wire[AppController]
 
-  implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
+  given ec: ExecutionContext = scala.concurrent.ExecutionContext.global
   def controllerComponents: ControllerComponents
 }

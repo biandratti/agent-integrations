@@ -1,7 +1,8 @@
-import controllers.{AppController, HealthCheckController}
+import controllers.AppController
+import controllers.HealthCheckController
 import io.opentelemetry.api.GlobalOpenTelemetry
 import zhttp.service.Server
-import zio.*
+import zio._
 import zio.logging.LogFormat
 import zio.logging.backend.SLF4J
 

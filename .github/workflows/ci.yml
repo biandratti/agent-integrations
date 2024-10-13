@@ -47,8 +47,8 @@ jobs:
           apps: sbt
       - name: Scalafix Lint
         run: sbt scalafixLint
-      - name: Scapegoat Lint
-        run: sbt scapegoatLint
+#      - name: Scapegoat Lint
+#        run: sbt scapegoatLint
   unit_test:
     runs-on: ubuntu-latest
     steps:

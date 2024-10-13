@@ -1,5 +1,7 @@
 import org.scalatestplus.play.FakeApplicationFactory
-import play.api.{Application, ApplicationLoader, Environment}
+import play.api.Application
+import play.api.ApplicationLoader
+import play.api.Environment
 
 trait TraceApplicationFactory extends FakeApplicationFactory {
 
