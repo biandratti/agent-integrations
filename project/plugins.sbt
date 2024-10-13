@@ -8,7 +8,7 @@ addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
 
 //lints
-addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.2.1")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "3.2.2")
 //addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.2.6")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.13.0")
 
@@ -19,7 +19,7 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.2.0")
 addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "5.1.0")
 
 //gatling
-addSbtPlugin("io.gatling" % "gatling-sbt" % "4.10.0")
+addSbtPlugin("io.gatling" % "gatling-sbt" % "4.10.1")
 
 //https://github.com/scala/bug/issues/12632
 ThisBuild / libraryDependencySchemes ++= Seq(

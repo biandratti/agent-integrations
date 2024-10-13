@@ -38,9 +38,9 @@ curl -i  --header "context-id: mycontextid" localhost:9001/api/v1/trace
 * All apps use OpenTelemetry for monitoring.
 * OpenTelemetry agent sends tracing and metrics to OTEL.
 * Prometheus:
-  * http://localhost:9093
-  * http://localhost:9094
-  * http://localhost:9095
+  * http://localhost:9093/metrics
+  * http://localhost:9094/metrics
+  * http://localhost:9095/metrics
 * jaeger: http://localhost:16686
 
 ```
@@ -52,6 +52,7 @@ In the example, the user sends a request to app3 and the same trace id is sent a
 curl -i  --header "context-id: mycontextid" localhost:9003/api/v1/trace
 curl -i  --header "context-id: error" localhost:9003/api/v1/trace
 ```
+![image](https://github.com/user-attachments/assets/ee5ff78a-4d0c-4474-a51f-1249302c14b9)
 
 <img width="300" src="https://user-images.githubusercontent.com/72261652/233178921-9a1bc156-f133-4702-9698-14b8453354cd.png" />
 
