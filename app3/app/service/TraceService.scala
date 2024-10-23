@@ -1,12 +1,16 @@
 package service
 
-import models.TraceResponse
-import play.api.libs.ws.WSClient
-import play.api.{Configuration, Logging, MarkerContext}
-import utils.ContextId
-
 import javax.inject.Inject
-import scala.concurrent.{ExecutionContext, Future}
+
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+
+import models.TraceResponse
+import play.api.Configuration
+import play.api.Logging
+import play.api.MarkerContext
+import play.api.libs.ws.WSClient
+import utils.ContextId
 
 class TraceService @Inject() (ws: WSClient, config: Configuration)
     extends Logging {
@@ -14,7 +18,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
   private lazy val api4URL = config.get[String]("app4.url")
   private lazy val api5URL = config.get[String]("app5.url")
 
-  def getTrace(ctxId: String)(implicit
+  def getTrace(ctxId: String)(using
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
@@ -24,7 +28,7 @@ class TraceService @Inject() (ws: WSClient, config: Configuration)
     } yield result
   }
 
-  private def getTrace(ctxId: String, url: String)(implicit
+  private def getTrace(ctxId: String, url: String)(using
       mc: MarkerContext,
       ex: ExecutionContext
   ): Future[TraceResponse] = {
