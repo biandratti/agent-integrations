@@ -13,7 +13,7 @@ lazy val dockerBaseImageName = "adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine"
 
 lazy val commonSettings = Seq(
   organization := "biandratti",
-  scalaVersion := "2.13.14",
+  scalaVersion := "2.13.16",
   scalacOptions += "-Xsource:3",
   ThisBuild / scapegoatVersion := "3.0.3",
   // wartremoverErrors ++= Warts.unsafe.diff(Seq(Wart.Any)),
