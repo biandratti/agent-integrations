@@ -58,7 +58,7 @@ object Dependencies {
     )
   }
 
-  lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "1.0.18"
+  lazy val kamonAgent: ModuleID = "io.kamon" % "kanela-agent" % "2.0.0"
 
   lazy val openTelemetryAgent: ModuleID =
     "io.opentelemetry.javaagent" % "opentelemetry-javaagent" % JavaInstrumentVersion
