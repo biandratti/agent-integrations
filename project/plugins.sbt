@@ -2,7 +2,7 @@
 addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.5")
 
 //Agents (Kanela and Opentelemetry)
-addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.1.8")
+addSbtPlugin("com.github.sbt" % "sbt-javaagent" % "0.2.0")
 
 //scala-fmt
 addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.2")
